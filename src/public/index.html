@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiasLui: Blog</title>
+
+  <link rel="stylesheet" href="/styles/output.css">
+  <link rel="stylesheet" href="/styles/tailwind.css">
+  <script src="/scripts/main.js"></script>
+</head>
+
+<body class="bg-slate-50 dark:bg-bgdark text-slate-900 dark:text-slate-100 min-h-screen grid-background">
+
+  <header class="sticky top-0 z-50 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4">
+      <div class="flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2 sm:gap-3 group">
+          <span
+            class="text-lg sm:text-xl font-bold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">diaslui.com</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="/"
+            class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-medium transition-colors">
+            Feed
+          </a>
+          <a href="/"
+            class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-medium transition-colors">
+            Hire me
+          </a>
+          <a href="/links"
+            class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-medium transition-colors">
+            Links
+          </a>
+        </nav>
+
+        <div class="flex items-center gap-1 sm:gap-2">
+          <a href="https://github.com/diaslui" target="_blank"
+            class="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a>
+          <a href="https://linkedin.com/in/diaslui" target="_blank"
+            class="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </a>
+          <a href="https://twitter.com/diasluii" target="_blank"
+            class="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href="https://instagram.com/diasluii" target="_blank"
+            class="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.75 2a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" />
+            </svg>
+          </a>
+
+          <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            aria-label="Toggle theme">
+            <svg id="sunIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+              </path>
+            </svg>
+            <svg id="moonIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+
+          <button class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" <svg
+            class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobileMenu" class="md:hidden hidden mt-4 space-y-2 border-t border-slate-200 dark:border-slate-800 pt-4">
+        <a href="/"
+          class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-medium transition-colors">
+          Feed
+        </a>
+        <a href="/"
+          class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-medium transition-colors">
+          Hire me
+        </a>
+        <a href="/links"
+          class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-medium transition-colors">
+          Links
+        </a>
+        <div class="flex gap-2 px-4 pt-2 border-t border-slate-200 dark:border-slate-800 mt-2">
+          <a href="https://github.com/diaslui" target="_blank"
+            class="flex-1 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a>
+          <a href="https://linkedin.com/diaslui" target="_blank"
+            class="flex-1 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </a>
+          <a href="https://twitter.com/diasluii" target="_blank"
+            class="flex-1 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 flex items-center justify-center">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href="https://instagram.com/diasluii" target="_blank"
+            class="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.75 2a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" />
+            </svg>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
+    <div class="grid lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
+
+      <aside class="hidden lg:block lg:col-span-3 space-y-6">
+        <div class="bg-subglight dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+          <div class="flex flex-col items-center text-center">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQEUySYL7FPTHw/profile-displayphoto-crop_800_800/B4DZoeC90CGwAI-/0/1761440687391?e=1767225600&v=beta&t=z0xffne_bmnNOexhfSeDz7uVfCzeEDHpBnqGHN0YW4c"
+              class="w-20 h-20 rounded-full bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center text-3xl mb-4">
+            </img>
+            <h3 class="font-bold text-lg mb-1">Pedro Luis D.</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Software Engineer | Student</p>
+            <div class="flex gap-2 w-full">
+              <a href="/"
+                class="flex-1 font-bold text-center py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg text-sm transition-colors">
+                Let's Connect
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-primary-500/10 to-accent-900/10 dark:from-primary-500/20 dark:to-accent-600/20 border border-primary-500/20 dark:border-primary-500/30 rounded-2xl p-4">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="flex gap-0.5 playing-animation">
+              <div class="w-1 h-3 bg-primary-500 rounded-full"></div>
+              <div class="w-1 h-4 bg-primary-500 rounded-full"></div>
+              <div class="w-1 h-2 bg-primary-500 rounded-full"></div>
+            </div>
+            <span class="text-xs font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wider">Listen
+              to music now</span>
+          </div>
+          <div class="flex gap-3">
+            <img src="/placeholder.svg?height=64&width=64" alt="Album Cover" class="w-16 h-16 rounded-lg shadow-lg">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-semibold text-sm truncate mb-1">Song Name</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 truncate">Artist</p>
+              <p class="text-xs text-slate-500 dark:text-slate-500 mt-2">Platform</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+          <h3 class="font-semibold mb-4">Links</h3>
+          <div class="space-y-3">
+            <a href="#"
+              class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              My Tree
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <div class="lg:col-span-6 space-y-6 sm:space-y-8">
+
+        <div
+          class="lg:hidden bg-gradient-to-br from-primary-500/10 to-accent-600/10 dark:from-primary-500/20 dark:to-accent-600/20 border border-primary-500/20 dark:border-primary-500/30 rounded-2xl p-4">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="flex gap-0.5 playing-animation">
+              <div class="w-1 h-3 bg-primary-500 rounded-full"></div>
+              <div class="w-1 h-4 bg-primary-500 rounded-full"></div>
+              <div class="w-1 h-2 bg-primary-500 rounded-full"></div>
+            </div>
+            <span class="text-xs font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wider">Tocando
+              Agora</span>
+          </div>
+          <div class="flex gap-3">
+            <img src="/placeholder.svg?height=64&width=64" alt="Album Cover" class="w-16 h-16 rounded-lg shadow-lg">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-semibold text-sm truncate mb-1">Song Name</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 truncate">Artist</p>
+              <p class="text-xs text-slate-500 dark:text-slate-500 mt-2">Platform</p>
+            </div>
+          </div>
+        </div>
+
+        <section>
+          <h2 class="text-xs font-bold mb-4 text-slate-500 dark:text-slate-400 uppercase tracking-wider px-1">Life
+            Storys</h2>
+          <div class="flex gap-3 sm:gap-4 overflow-x-auto hide-scrollbar pb-2">
+            <div class="flex flex-col items-center gap-2 flex-shrink-0 cursor-pointer group">
+              <div class="relative story-ring w-16 h-16 sm:w-20 sm:h-20">
+                <div
+                  class="absolute inset-0.5 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center overflow-hidden">
+                  <img src="http://localhost:3000/img/zont_zo_it.jpg"
+                    class="w-full h-full rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-xl sm:text-2xl"></img>
+                </div>
+              </div>
+              <span class="text-xs text-slate-600 dark:text-slate-400 font-medium">Example 1</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 flex-shrink-0 cursor-pointer group">
+              <div class="relative story-ring w-16 h-16 sm:w-20 sm:h-20">
+                <div
+                  class="absolute inset-0.5 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center overflow-hidden">
+                  <img src="http://localhost:3000/img/zont_zo_it.jpg"
+                    class="w-full h-full rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-xl sm:text-2xl"></img>
+                </div>
+              </div>
+              <span class="text-xs text-slate-600 dark:text-slate-400 font-medium">Example 2</span>
+            </div>
+
+          </div>
+
+        </section>
+
+        <section class="bg-gradient-to-br from-primary-500 to-accent-600 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
+          <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+            <img src="/img/zont_zo_it.jpg"
+              class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-3xl sm:text-4xl flex-shrink-0">
+
+            </img>
+            <div class="flex-1 text-center sm:text-left">
+              <h2 class="text-xl sm:text-2xl font-bold mb-2">Hey There, Im diaslui, aaand this is diaslui.com!</h2>
+              <p class="text-white/90 mb-4 text-sm sm:text-base">This is my newsletter or blog (yes, just like in 2009),
+                but I've adapted a few things lol. If you want to know more about me, just click below on "more about
+                me".</p>
+              <a href="#"
+                class="inline-block px-4 sm:px-6 py-2 bg-white text-primary-600 rounded-lg font-semibold hover:bg-white/90 transition-colors text-sm sm:text-base">
+                More About Me
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-xs font-bold mb-4 text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2 px-1">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+            </svg>
+            Fixed
+          </h2>
+
+          <article
+            class="bg-subglight dark:bg-subgdark border-2 border-primary-500/30 dark:border-primary-500/40 rounded-2xl overflow-hidden pinned-glow hover:shadow-2xl transition-shadow">
+            <img src="/placeholder.svg?height=300&width=600" alt="Post Image" class="w-full h-48 sm:h-56 object-cover">
+            <div class="p-4 sm:p-6">
+              <div class="flex items-start gap-3 sm:gap-4 mb-4">
+                <img src="/img/zont_zo_it.jpg"
+                  class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
+
+                </img>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-base sm:text-lg mb-1">Luis Dias</h3>
+                  <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">2 Days Ago • 5 min read</p>
+                </div>
+              </div>
+
+              <h2
+                class="text-lg sm:text-xl font-bold mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              </h2>
+
+              <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm sm:text-base line-clamp-2 sm:line-clamp-3">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-2 sm:px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-xs font-medium">Lorem</span>
+                <span
+                  class="px-2 sm:px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-full text-xs font-medium">Lorem</span>
+                <span
+                  class="px-2 sm:px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-xs font-medium">Lorem</span>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center gap-2">
+                    <button id="up-pinned-1"
+                      class="vote-btn p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                      </svg>
+                    </button>
+                    <span id="count-pinned-1" class="font-semibold text-sm sm:text-base">142</span>
+                    <button id="down-pinned-1"
+                      class="vote-btn p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <button
+                    class="flex items-center gap-1.5 sm:gap-2 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm sm:text-base">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                      </path>
+                    </svg>
+                    <span class="hidden sm:inline">28</span>
+                  </button>
+                </div>
+
+                <a href="#"
+                  class="px-3 sm:px-4 py-1.5 sm:py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-bold transition-colors text-sm sm:text-base">
+                  Read Full Article
+                </a>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section id="feed">
+
+          <div class="space-y-4 sm:space-y-6">
+            <article
+              class="bg-subglight dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow">
+              <img src="/placeholder.svg?height=300&width=600" alt="Post Image"
+                class="w-full h-48 sm:h-56 object-cover">
+              <div class="p-4 sm:p-6">
+                <div class="flex items-start gap-3 sm:gap-4 mb-4">
+                  <img src="/img/zont_zo_it.jpg"
+                    class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center text-lg sm:text-xl flex-shrink-0"></img>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-bold text-base sm:text-lg mb-1">Luis Dias</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">3 days ago • 8 min read</p>
+                  </div>
+                </div>
+
+                <h2
+                  class="text-lg sm:text-xl font-bold mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                </h2>
+
+                <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm sm:text-base line-clamp-2 sm:line-clamp-3">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua.
+                </p>
+
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span
+                    class="px-2 sm:px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-xs font-medium">Lorem</span>
+                  <span
+                    class="px-2 sm:px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-medium">Lorem</span>
+                </div>
+
+                <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2">
+                      <button id="up-1"
+                        class="vote-btn p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                          </path>
+                        </svg>
+                      </button>
+                      <span id="count-1" class="font-semibold text-sm sm:text-base">89</span>
+                      <button id="down-1"
+                        class="vote-btn p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                          </path>
+                        </svg>
+                      </button>
+                    </div>
+
+                    <button
+                      class="flex items-center gap-1.5 sm:gap-2 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm sm:text-base">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                        </path>
+                      </svg>
+                      <span class="hidden sm:inline">15</span>
+                    </button>
+                  </div>
+
+                  <a href="#"
+                    class="px-3 sm:px-4 py-1.5 sm:py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-bold transition-colors text-sm sm:text-base">
+                    Read Full Article
+                  </a>
+                </div>
+              </div>
+            </article>
+
+
+
+          </div>
+        </section>
+
+      </div>
+
+      <aside class="hidden lg:block lg:col-span-3 space-y-6">
+        <div class="bg-white dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+          <h3 class="font-semibold mb-4">Most Popular Tags</h3>
+          <div class="flex flex-wrap gap-2">
+            <a href="#"
+              class="px-3 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 text-slate-700 dark:text-slate-300 rounded-full text-sm transition-colors">
+              #example
+            </a>
+
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+          <h3 class="font-semibold mb-4">Statistics</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm text-slate-600 dark:text-slate-400">Posts</span>
+                <span class="font-semibold">47</span>
+              </div>
+              <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
+                <div class="bg-primary-500 h-2 rounded-full" style="width: 75%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm text-slate-600 dark:text-slate-400">Total Views</span>
+                <span class="font-semibold">12.5k</span>
+              </div>
+              <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
+                <div class="bg-accent-500 h-2 rounded-full" style="width: 60%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="bg-subglight dark:bg-subgdark border-t border-slate-200 dark:border-slate-800 mt-12 sm:mt-16 lg:mt-20">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-lg font-bold">diaslui.com</span>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas totam deserunt eos excepturi vitae.
+            Numquam quo obcaecati, corrupti aspernatur libero excepturi tempore ipsa id labore, harum ex distinctio
+            minima fuga!
+          </p>
+          <div class="flex gap-3">
+            <a href="https://github.com/diaslui" target="_blank"
+              class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+            </a>
+            <a href="https://linkedin.com/in/diaslui" target="_blank"
+              class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </a>
+            <a href="https://twitter.com/diasluii" target="_blank"
+              class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+
+            <a href="https://instagram.com/diasluii" target="_blank"
+              class="hidden sm:flex p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.75 2a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" />
+              </svg>
+            </a>
+
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4 text-sm sm:text-base">Navigation</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/"
+                class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Feed</a>
+            </li>
+
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4 text-sm sm:text-base">Non Relevant</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#"
+                class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">This
+                website source code</a></li>
+            <li><a href="#"
+                class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">My
+                Resume</a></li>
+
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4 text-sm sm:text-base">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#"
+                class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Privacy
+              </a></li>
+            <li><a href="#"
+                class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Terms
+                of Use</a></li>
+            <li><a href="#"
+                class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 sm:pt-8 border-t border-slate-200 dark:border-slate-800">
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-slate-600 dark:text-slate-400 text-center sm:text-left">
+            © <span class="this-year"></span> diaslui.com. All rights reserved.
+          </p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            This source code is <a href="https://github.com/diaslui/diaslui.com"
+              class="text-primary-600 dark:text-primary-400 hover:underline">available on GitHub</a>.
+          </p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            Made with <span class="text-red-500">
+              <3< /span> by Pedro Luis D.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

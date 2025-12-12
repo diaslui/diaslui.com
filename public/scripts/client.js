@@ -19,6 +19,7 @@ const updateMusicInfo = (data) => {
     domRefs.listenMusicDiv.style.display = "none";
     return;
   }
+  domRefs.listenMusicDiv.style.display = "block";
 
   domRefs.listenMusicSongName.textContent = data.trackName;
   domRefs.listenMusicArtist.textContent = data.artist;
@@ -40,7 +41,7 @@ const sse = () => {
   eventSource.onerror = (error) => {
     console.error("SSE err:", error);
     eventSource.close();
-  //  setTimeout(sse, 10000);
+    setTimeout(sse, 10000);
   };
 };
 

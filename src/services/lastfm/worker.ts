@@ -14,5 +14,5 @@ export const lastfmWorker = () => {
       playing: true,
       ...actualTrack,
     });
-  }, 500);
+  }, 10000);
 };

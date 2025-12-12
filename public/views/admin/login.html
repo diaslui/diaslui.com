@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>diaslui: sign in</title>
+    <link rel="stylesheet" href="/styles/output.css">
+    <link rel="stylesheet" href="/styles/tailwind.css">
+
+</head>
+
+<body
+    class="bg-gradient-to-br from-slate-50 via-primary-50 to-accent-50 dark:from-bgdark dark:via-gray-900 dark:to-gray-800 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
+
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2 max-w-md w-full px-4"></div>
+
+    <main class="flex items-center justify-center min-h-screen px-4 py-12">
+        <div class="w-full max-w-md relative">
+
+            <div
+                class="relative backdrop-blur-glass rounded-3xl shadow-2xl overflow-hidden border border-white/20 dark:border-gray-700/50 transition-all duration-300 hover:shadow-primary-500/20 hover:shadow-3xl">
+
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse-slow">
+                </div>
+
+                <div class="relative bg-white dark:bg-gray-800 m-[1px] rounded-3xl">
+
+                    <div class="relative py-8 px-8 overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary-500/10 to-accent-500/10 dark:from-primary-900/30 dark:to-accent-900/30">
+                        </div>
+
+                        <div class="relative z-10">
+
+                            <h1 class="text-4xl font-bold text-center text-primary-500 mb-2">
+                                Hello Again :0
+                            </h1>
+                            <p class="text-center text-gray-600 dark:text-gray-400">
+                                Sign in to your account to continue on our admin panel and receive magic powers
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="px-8 pb-8">
+                        <form id="login-form" class="space-y-5 mt-4">
+
+                            <div class="space-y-2">
+                                <label for="email"
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
+                                        </path>
+                                    </svg>
+                                    Your Email
+                                </label>
+                                <div class="relative">
+                                    <input type="email" id="email"
+                                        class="input-glow w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 focus:outline-none focus:border-primary-400 dark:focus:border-primary-500 transition-all duration-300 text-gray-900 dark:text-gray-100 placeholder-gray-400"
+                                        placeholder="mybestemail@email.com" required>
+                                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                        <svg id="email-check" class="w-5 h-5 text-green-500 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="password"
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                        </path>
+                                    </svg>
+                                    Your Password
+                                </label>
+                                <div class="relative">
+                                    <input type="password" id="password"
+                                        class="input-glow w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 focus:outline-none focus:border-primary-400 dark:focus:border-primary-500 transition-all duration-300 text-gray-900 dark:text-gray-100 placeholder-gray-400"
+                                        placeholder="mybestpassword123" required>
+                                    <button type="button" id="toggle-password"
+                                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                                        <svg id="eye-open" class="w-5 h-5" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                        <svg id="eye-closed" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="submit-login"
+                                class="mt-6 w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 group">
+                                <span id="button-text">Sign in</span>
+                                <svg id="button-arrow"
+                                    class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                                <svg id="button-spinner" class="w-5 h-5 animate-spin hidden" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
+                                </svg>
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 font-black">
+                <a href="/"
+                    class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors group">
+                    <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="scripts/signin.js"></script>
+</body>
+
+
+</html>

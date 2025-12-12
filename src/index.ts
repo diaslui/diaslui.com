@@ -3,6 +3,9 @@ import { staticMiddleware } from "./middlewares/static.middleware";
 import { pagesMiddleware } from "./middlewares/pages.middleware";
 import { authMiddleware } from "./middlewares/auth.middleware";
 import routes from "./modules/routes";
+import { getActualTrack } from "./services/lastfm/service";
+import { initWorkers } from "./services/services";
+import {servicesRoutes} from './services/routes'
 
 const server = Bun.serve({
   port: 3000,
@@ -23,7 +26,9 @@ const server = Bun.serve({
 
     return new Response("404 Not Found", { status: 404 });
   },
-  routes: routes,
+  routes: {...servicesRoutes, ...routes},
 });
+
+initWorkers();
 
 console.log(`running at http://localhost:${server.port}`);

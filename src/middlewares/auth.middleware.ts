@@ -3,11 +3,12 @@ import { BunRequest } from "bun";
 import jwt from "jsonwebtoken";
 
 export const authMiddleware = (req: BunRequest) => {
+  return undefined;
   const token = (req.headers.get("cookie") || "")
     .split("; ")
     .find((c) => c.startsWith("token="))
     ?.split("=")[1];
-  console.log(token);
+  //console.log(token);
   if (!token) {
     return new Response("Unauthorized", { status: 401 });
   }
@@ -16,8 +17,7 @@ export const authMiddleware = (req: BunRequest) => {
     jwt.verify(token, process.env.JWT_SECRET);
     console.log("valid token");
   } catch (e) {
-      console.log("invalid token");
+    console.log("invalid token");
     return new Response("Forbbiden", { status: 403 });
-  
   }
 };

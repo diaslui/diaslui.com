@@ -3,7 +3,7 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "bun build",
+    "build": "bun build src/index.ts",
     "start": "bun run src/index.ts",
     "dev": "bun run src/index.ts --watch",
     "dev:css": "npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/output.css --watch",

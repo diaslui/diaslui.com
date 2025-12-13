@@ -2,8 +2,9 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 export default {
   content: [
-    "./public/**/*.html",
-    "./public/pages/**/*.html",
+    "./public/**/*.ejs",
+    "./public/*.ejs",
+    "./public/views/**/*.ejs",
     "./public/scripts/**/*.js",
   ],
   theme: {

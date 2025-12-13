@@ -1,7 +1,7 @@
-import { lastFmSseController } from "./lastfm/controller";
+import { Elysia } from "elysia";
 
-export const servicesRoutes = {
-  "/lastfm/sse": {
-    GET: lastFmSseController,
-  },
-};
+import { createSseResponse } from "./lastfm/controller";
+
+const servicesRoutes = new Elysia().get("/lastfm/sse", () => createSseResponse());
+
+export default servicesRoutes;

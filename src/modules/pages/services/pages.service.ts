@@ -1,12 +1,12 @@
-import { join } from "path";
+import ejs from "ejs";
+import { readFile } from "fs/promises";
+import path from "path";
 
-export const serveStatic = (html: string): Response => {
-  const htmlFile = Bun.file(
-    join(import.meta.dir, "../../../../public/views/" + html + ".html")
+
+export const renderEjs = async (view, data = {}): Promise<string> => {
+  const file = await readFile(
+    path.join(import.meta.dir, "../../../../public/views/", `${view}.ejs`),
+    "utf8"
   );
-  return new Response(htmlFile, {
-    headers: {
-      "Content-Type": "text/html",
-    },
-  });
+  return ejs.render(file, data);
 };

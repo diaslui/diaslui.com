@@ -1,7 +1,7 @@
-import { authRoutes } from "./auth/routes";
+import { Elysia } from "elysia";
+import authRoutes from "./auth/routes";
+import pageRoutes from "./pages/routes";
 
-const routes = {
-  ...authRoutes,
-};
+const routes = new Elysia().use(authRoutes).use(pageRoutes);
 
 export default routes;

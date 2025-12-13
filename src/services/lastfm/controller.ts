@@ -1,6 +1,4 @@
-import type { BunRequest } from "bun";
-
-const clients = new Set<ReadableStreamDefaultController>();
+const clients = new Set<ReadableStreamDefaultController<string>>();
 
 export const sendAllBySse = (data: unknown) => {
   const payload = `data: ${JSON.stringify(data)}\n\n`;
@@ -14,10 +12,10 @@ export const sendAllBySse = (data: unknown) => {
   }
 };
 
-export const lastFmSseController = (req: BunRequest) => {
-  let localController: ReadableStreamDefaultController;
+export const createSseResponse = () => {
+  let localController: ReadableStreamDefaultController<string>;
 
-  const stream = new ReadableStream({
+  const stream = new ReadableStream<string>({
     start(controller) {
       localController = controller;
       clients.add(controller);
@@ -31,10 +29,8 @@ export const lastFmSseController = (req: BunRequest) => {
   });
 
   return new Response(stream, {
-    status: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "text/event-stream;charset=utf-8",
+      "Content-Type": "text/event-stream; charset=utf-8",
       "Cache-Control": "no-cache, no-transform",
       Connection: "keep-alive",
       "X-Accel-Buffering": "no",

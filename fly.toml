@@ -16,6 +16,10 @@ primary_region = 'gru'
   min_machines_running = 0
   processes = ['app']
 
+[[statics]]
+  guest_path = "/app/public"
+  url_prefix = "/assets"
+
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'

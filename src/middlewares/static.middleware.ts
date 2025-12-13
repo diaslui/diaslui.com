@@ -7,6 +7,7 @@ const MIME_TYPES: { [key: string]: string } = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".gif": "image/gif",
+  ".ico": "image/x-icon",
   ".svg": "image/svg+xml",
   ".json": "application/json",
 };

@@ -3,6 +3,7 @@ import { initWorkers } from "./services/services";
 import { staticPlugin } from "@elysiajs/static";
 import servicesRoutes from "./services/routes";
 import routes from "./modules/routes";
+import { join } from "path";
 
 const server = new Elysia()
   .listen(3000, () => {
@@ -14,7 +15,7 @@ const server = new Elysia()
   .use(servicesRoutes)
   .use(
     staticPlugin({
-      assets: "public",
+      assets: join(import.meta.dir, "../public"),
       prefix: "/assets",
     })
   );

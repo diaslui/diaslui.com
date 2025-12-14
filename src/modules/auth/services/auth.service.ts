@@ -1,17 +1,20 @@
-import jwt from "jsonwebtoken";
+import { prisma } from "../../../db/connection";
+import { userRepos, authSessionRepos } from "../repositories/user.repositories";
 
 export const signInService = {
-  authenticate: (payload: { email: string; password: string }) => {
-    if (
-      payload.email == process.env.EMAIL_ADMIN &&
-      payload.password == process.env.PASSWORD_ADMIN
-    ) { // yes, this is repository mock
-      return true;
+  authenticate: async (payload: { email: string; password: string }) => {
+    const user = await userRepos.getUser(payload.email, payload.password);
+    if (!user) {
+      return undefined;
     }
 
-    return false;
+    return user;
   },
-  tokenize: (payload: { email: string; password: string }) => {
-    return jwt.sign({ email: payload.email }, process.env.JWT_SECRET);
+};
+
+export const authSessionService = {
+  createSession: async (sessionId: string, userId: string, expiresAt: Date) => {
+    const session = await authSessionRepos.createSession(sessionId, userId, expiresAt);
+    return session;
   },
 };

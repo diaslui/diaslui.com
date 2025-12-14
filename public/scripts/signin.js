@@ -133,7 +133,7 @@ domRefs.loginForm.addEventListener("submit", async (e) => {
   domRefs.buttonSpinner.classList.remove("hidden");
 
   try {
-    const response = await fetch("/login", {
+    const response = await fetch("/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -153,7 +153,7 @@ domRefs.loginForm.addEventListener("submit", async (e) => {
         showToast(
           json.error ||
             "Login failed.Are you sure your credentials are correct?",
-          "error"
+          "error",
         );
         resetButton();
       }

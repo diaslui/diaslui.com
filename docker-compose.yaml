@@ -17,10 +17,11 @@ services:
     build: .
     ports:
       - "3000:3000"
+      - "51212:51212"
     env_file:
       - .env
     environment:
-      DATABASE_URL: postgresql://admin:mysecretpassword@db:5432/postgres
+      DATABASE_URL: ${DATABASE_URL}
     depends_on:
       - db
     develop:
@@ -32,9 +33,12 @@ services:
   db:
     image: postgres:12-alpine
     restart: always
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_DB: postgres
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    
     ports:
       - "5432:5432"

@@ -1,5 +1,4 @@
 export const getActualTrack = async () => {
-  console.log(process.env.LASTFM_API_KEY);
   if (!process.env.LASTFM_API_KEY) {
     return undefined;
   }

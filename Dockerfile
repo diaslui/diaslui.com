@@ -22,5 +22,9 @@ RUN rm -rf node_modules && bun install --ci --production
 FROM base
 COPY --from=build /app /app
 
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
+RUN bunx prisma generate
+
 EXPOSE 3000
-CMD ["bun", "run", "start"]
+CMD ["bun", "run", "dev"]

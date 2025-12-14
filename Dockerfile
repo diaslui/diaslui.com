@@ -22,9 +22,11 @@ RUN rm -rf node_modules && bun install --ci --production
 FROM base
 COPY --from=build /app /app
 
-ARG DATABASE_URL
-ENV DATABASE_URL=${DATABASE_URL}
-RUN bunx prisma generate
+#RUN bunx prisma generate
 
 EXPOSE 3000
-CMD ["bun", "run", "dev"]
+
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod a+x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+#CMD ["bun", "run", "dev"]

@@ -1,6 +1,5 @@
 const domRefs = {};
 const eRefs = {
-  themeToggle: ".theme-toggle",
   listenMusicDiv: ".listen-music",
   listenMusicSongName: ".listen-music-song-name",
   listenMusicArtist: ".listen-music-artist",
@@ -64,33 +63,10 @@ const sse = () => {
 const init = () => {
   sse();
 
-  domRefs.themeToggle.addEventListener("click", toggleTheme);
-};
-
-const toggleTheme = () => {
-  document.documentElement.classList.toggle("dark");
-  const isDark = document.documentElement.classList.contains("dark");
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-
-  updateThemeIcons(isDark);
-};
-
-const updateThemeIcons = (isDark) => {
-  document.getElementById("sunIcon").classList.toggle("hidden", isDark);
-  document.getElementById("moonIcon").classList.toggle("hidden", !isDark);
 };
 
 window.addEventListener("DOMContentLoaded", () => {
+  
   refElements();
-  const theme = localStorage.getItem("theme") || "dark";
-  const isDark = theme === "dark";
-
-  if (isDark) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-
-  updateThemeIcons(isDark);
   init();
 });

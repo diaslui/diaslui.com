@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>diaslui: sign in</title>
-    <link rel="stylesheet" href="/styles/output.css">
-    <link rel="stylesheet" href="/styles/tailwind.css">
+    <meta name="description"
+        content="Sign in to the admin panel of diaslui.com to manage content and access exclusive features.">
+    
+  <%-include("../partials/head")-%>
 
 </head>
 
 <body
     class="bg-gradient-to-br from-slate-50 via-primary-50 to-accent-50 dark:from-bgdark dark:via-gray-900 dark:to-gray-800 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
+
+      <%-include("../partials/header")-%>
 
     <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2 max-w-md w-full px-4"></div>
 
@@ -144,8 +147,9 @@
             </div>
         </div>
     </main>
+      <%-include("../partials/footer")-%>
 
-    <script src="scripts/signin.js"></script>
+    <script src="/assets/scripts/signin.js"></script>
 </body>
 
 

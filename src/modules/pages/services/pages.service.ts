@@ -4,9 +4,12 @@ import path from "path";
 
 
 export const renderEjs = async (view, data = {}): Promise<string> => {
+  const filePath = path.join(import.meta.dir, "../../../../public/views/", `${view}.ejs`);
   const file = await readFile(
-    path.join(import.meta.dir, "../../../../public/views/", `${view}.ejs`),
+    filePath,
     "utf8"
   );
-  return ejs.render(file, data);
+  return ejs.render(file, data ,{
+     filename: filePath,
+  });
 };

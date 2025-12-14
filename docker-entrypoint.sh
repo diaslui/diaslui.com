@@ -2,8 +2,9 @@
 
 bunx prisma generate
 bunx prisma migrate dev
+bun run scripts/creater-starter-user.ts
+
 bun run start
 
-bun run scripts/creater-starter-user.ts
 
 exec "$@"

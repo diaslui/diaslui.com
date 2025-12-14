@@ -1,0 +1,40 @@
+version: "3.9"
+name: diaslui.com
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: diaslui_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./public:/usr/share/nginx/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - webapp
+
+  webapp:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://admin:mysecretpassword@db:5432/postgres
+    depends_on:
+      - db
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+
+  db:
+    image: postgres:12-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"

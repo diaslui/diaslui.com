@@ -1,10 +1,11 @@
 export const getActualTrack = async () => {
+  console.log(process.env.LASTFM_API_KEY);
   if (!process.env.LASTFM_API_KEY) {
     return undefined;
   }
 
   const response = await fetch(
-    `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=scr6w&api_key=${process.env.LASTFM_API_KEY}&format=json`
+    `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=scr6w&api_key=${process.env.LASTFM_API_KEY}&format=json`,
   );
 
   const json: any = await response.json();

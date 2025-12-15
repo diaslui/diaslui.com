@@ -1,15 +1,65 @@
+<img style="display:block; margin:auto;" src="https://diaslui.com/assets/img/full-diaslui.png" alt="diaslui.com logo" width="50"/>
+
 # diaslui.com
 
-To install dependencies:
 
-```bash
-bun install
+This repository contains the full service for <a href="https://diaslui.com">diaslui.com</a>.
+
+---
+
+## Tech Review
+
+* **Runtime**: Bun
+* **Framework**: Elysia
+* **Templating**: EJS
+* **ORM**: Prisma
+* **Database**: PostgreSQL
+* **Reverse Proxy**: Nginx
+* **Containerization**: Docker / Docker Compose
+* **Deployment**: Fly.io
+
+---
+
+## Running?
+
+### Environment Variables
+
+Some environment variables
+
+Required:
+
+```env
+DATABASE_URL=postgresql://user:password@host:5432/database
 ```
 
-To run:
+Opcional:
 
-```bash
-bun run src/index.ts
+```env
+LASTFM_API_KEY =ebbf45187b226b6371cde626538005f4
+STATER_USER_EMAIL=diasluip@gmail.com
+STATER_USER_PASSWORD=strongpassword123
+STATER_USER_USERNAME=diasluip
+STATER_USER_DISPLAY_NAME=Luis D
 ```
 
-This project was created using `bun init` in bun v1.2.20. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+### Build and Run
+
+```bash
+docker compose up --build
+```
+
+Services started:
+
+* **webapp** → Bun + Elysia (`:3000`)
+* **db** → PostgreSQL (`:5432`)
+* **nginx** → Reverse proxy (`:80`)
+
+The backend listens on:
+
+```
+0.0.0.0:3000
+```
+Click here to open in your browser: [http://localhost](http://localhost)
+
+<img style="display:block; margin:auto;" src="https://diaslui.com/assets/img/ogbanner.jpg" alt="diaslui.com logo"/>
+

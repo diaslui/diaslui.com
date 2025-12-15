@@ -1,7 +1,7 @@
 #!/bin/bash
 
 bunx prisma generate
-prisma migrate deploy
+bunx prisma migrate deploy
 
 bun run scripts/creater-starter-user.ts
 

@@ -67,7 +67,7 @@ model Post {
   title     String   @unique
   description String
   tags      Tag[]
-  content   String
+  content   String?
   authorId  String
   author    User     @relation(fields: [authorId], references: [id])
   updatedAt DateTime @updatedAt

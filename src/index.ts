@@ -3,7 +3,7 @@ import { initWorkers } from "./services/services";
 import servicesRoutes from "./services/routes";
 import routes from "./modules/routes";
 import { cookie } from "@elysiajs/cookie";
-import {staticPlugin} from "@elysiajs/static";
+//import {staticPlugin} from "@elysiajs/static";
 
 new Elysia()
   .listen(
@@ -19,4 +19,4 @@ new Elysia()
   .use(cookie())
   .use(routes)
   .use(servicesRoutes)
-  .use(staticPlugin({ assets: "public", prefix: "/assets" }));
+ // .use(staticPlugin({ assets: "public", prefix: "/assets" }));

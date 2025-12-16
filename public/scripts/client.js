@@ -186,7 +186,7 @@ const updateMusicInfo = (data) => {
 
 const sse = () => {
   if (sseInstance) return;
-  const sseInstance = new EventSource("/lastfm/sse");
+  sseInstance = new EventSource("/lastfm/sse");
 
   sseInstance.onmessage = (event) => {
     const data = JSON.parse(event.data);

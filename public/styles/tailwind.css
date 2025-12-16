@@ -130,3 +130,58 @@
 .dark .pinned-glow {
   box-shadow: 0 0 20px rgba(233, 14, 80, 0.2);
 }
+
+
+    * {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .markdown-preview {
+      line-height: 1.7;
+    }
+
+    .markdown-preview h1 { font-size: 2em; font-weight: bold; margin-top: 1em; margin-bottom: 0.5em; }
+    .markdown-preview h2 { font-size: 1.5em; font-weight: bold; margin-top: 1em; margin-bottom: 0.5em; }
+    .markdown-preview h3 { font-size: 1.25em; font-weight: bold; margin-top: 1em; margin-bottom: 0.5em; }
+    .markdown-preview p { margin-bottom: 1em; }
+    .markdown-preview ul, .markdown-preview ol { margin-left: 1.5em; margin-bottom: 1em; }
+    .markdown-preview li { margin-bottom: 0.5em; }
+    .markdown-preview code { background: rgb(100 116 139 / 0.1); padding: 0.2em 0.4em; border-radius: 0.25em; font-size: 0.9em; }
+    .markdown-preview pre { background: rgb(100 116 139 / 0.1); padding: 1em; border-radius: 0.5em; overflow-x: auto; margin-bottom: 1em; }
+    .markdown-preview a { color: #0ea5e9; text-decoration: underline; }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .toast {
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .tag-input {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid;
+      border-radius: 0.5rem;
+      min-height: 42px;
+    }
+
+    .tag-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: #0ea5e9;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+    }

@@ -10,6 +10,7 @@
     "test": "bun test"
   },
   "devDependencies": {
+    "@elysiajs/static": "^1.4.7",
     "@types/bun": "latest",
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",

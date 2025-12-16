@@ -64,7 +64,7 @@ model Session {
 
 model Post {
   id        String   @id @default(uuid())
-  title     String
+  title     String   @unique
   tags      Tag[]
   content   String
   authorId  String

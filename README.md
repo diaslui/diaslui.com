@@ -35,11 +35,11 @@ DATABASE_URL=postgresql://user:password@host:5432/database
 Opcional:
 
 ```env
-LASTFM_API_KEY =ebbf45187b226b6371cde626538005f4
-STATER_USER_EMAIL=diasluip@gmail.com
-STATER_USER_PASSWORD=strongpassword123
-STATER_USER_USERNAME=diasluip
-STATER_USER_DISPLAY_NAME=Luis D
+LASTFM_API_KEY =yourapikey
+STATER_USER_EMAIL=youremail
+STATER_USER_PASSWORD=yourpassword
+STATER_USER_USERNAME=yourusername
+STATER_USER_DISPLAY_NAME=yourdisplayname
 ```
 
 ### Build and Run

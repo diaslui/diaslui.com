@@ -21,8 +21,6 @@ const refElements = () => {
 
 const updateMusicInfo = (data) => {
 
-  console.log("Updating music info:", data);
-
   if (!data.playing) {
     domRefs.listenMusicDiv.style.display = "none";
     domRefs.mobileMusicDiv.style.display = "none";
@@ -49,7 +47,6 @@ const sse = () => {
 
   eventSource.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    console.log("SSE data:", data);
     updateMusicInfo(data);
   };
 

@@ -29,4 +29,4 @@ EXPOSE 3000
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod a+x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
-#CMD ["bun", "run", "dev"]
+CMD ["bun", "run", "start"]

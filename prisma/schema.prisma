@@ -65,9 +65,9 @@ model Session {
 model Post {
   id        String   @id @default(uuid())
   title     String   @unique
-  description String
+  description String?
   tags      Tag[]
-  content   String?
+  content   String
   authorId  String
   author    User     @relation(fields: [authorId], references: [id])
   updatedAt DateTime @updatedAt

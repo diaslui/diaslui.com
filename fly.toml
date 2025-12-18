@@ -5,6 +5,7 @@
 
 app = 'diaslui-com'
 primary_region = 'gru'
+services.min_machines_running = 1
 
 [build]
 

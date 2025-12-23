@@ -15,11 +15,20 @@ const eRefs = {
   mobileMusicAlbumCover: ".mobile-music-album-cover",
 
   feedDiv: "#feed",
+  loadingPostsIndicator: "#loadind-posts-indicator",
 };
 
 const refElements = () => {
   for (const [key, selector] of Object.entries(eRefs)) {
     domRefs[key] = document.querySelector(selector);
+  }
+};
+
+const loadingPosts = (loading) => {
+  if (loading) {
+    domRefs.loadingPostsIndicator.style.display = "flex";
+  } else {
+    domRefs.loadingPostsIndicator.style.display = "none";
   }
 };
 
@@ -58,7 +67,7 @@ const createPostHtmlScheme = (data) => {
                     class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center text-lg sm:text-xl flex-shrink-0"></img>
                   <div class="flex-1 min-w-0">
                     <h3 class="font-bold text-base sm:text-lg mb-1">Luis Dias</h3>
-                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">${redableOldDate(data.createdAt)} • 8 min read</p>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400"> Published ${redableOldDate(data.createdAt)} </p>
                   </div>
                 </div>
 
@@ -68,7 +77,7 @@ const createPostHtmlScheme = (data) => {
                 </h2>
 
                 <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm sm:text-base line-clamp-2 sm:line-clamp-3">
-                  ${data.description}
+                  ${data.description || " "}
                 </p>
 
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -125,8 +134,8 @@ const createPostHtmlScheme = (data) => {
 };
 
 const getPosts = async () => {
+  loadingPosts(true);
   try {
-    console.log("getting posts...");
     const response = await fetch(
       `/api/posts?limit=8&cursor=${nextCursor || ""}`
     );
@@ -143,13 +152,17 @@ const getPosts = async () => {
     console.error("Err:", error);
 
     return undefined;
+  } finally {
+    loadingPosts(false);
   }
 };
 
 const postWorks = async () => {
   const data = await getPosts();
-  if (!data) {
-    domRefs.feedDiv.innerText = "No posts found.";
+  console.log("posts data:", data);
+  if (!data || data.length === 0) {
+    console.log("no posts found");
+    domRefs.feedDiv.innerHTML = "No posts found.";
     return;
   }
 

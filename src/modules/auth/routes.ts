@@ -1,7 +1,7 @@
 import { Elysia, t } from "elysia";
 
-import { signInController } from "./controllers/auth.controller";
-import { renderEjs } from "../pages/services/pages.service";
+import { signInController } from "@/modules/auth/controllers/auth.controller";
+import { renderEjs } from "@/modules/pages/services/pages.service";
 
 const authRoutes = new Elysia({ prefix: "/auth" });
 

@@ -147,7 +147,7 @@ domRefs.loginForm.addEventListener("submit", async (e) => {
       if (json.ok) {
         showToast("L0gin successful! You're welcome :)", "success");
         setTimeout(() => {
-          window.location.href = "/admin/dashboard";
+          window.location.href = "/admin/";
         }, 1000);
       } else {
         showToast(

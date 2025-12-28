@@ -1,5 +1,5 @@
 import { Elysia, t } from "elysia";
-import { renderEjs } from "./services/pages.service";
+import { ejsResponse } from "./services/pages.service";
 
 const staticPages: { [key: string]: string } = {
   "/": "index",
@@ -10,13 +10,8 @@ const staticPages: { [key: string]: string } = {
 const pageRoutes = new Elysia();
 
 for (const [route, view] of Object.entries(staticPages)) {
-  pageRoutes.get(route, async () => {
-    const html = await renderEjs(view);
-    return new Response(html, {
-      headers: {
-        "Content-Type": "text/html",
-      },
-    });
+  pageRoutes.get(route, () => {
+    return ejsResponse(view);
   });
 }
 

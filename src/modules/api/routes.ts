@@ -1,5 +1,5 @@
 import { Elysia, t } from "elysia";
-import { renderEjs } from "../pages/services/pages.service";
+import { ejsResponse } from "../pages/services/pages.service";
 import postControllers from "./controllers/post.controller";
 import storyControllers from "./controllers/story.controller"
 import {Post, PostPlain, PostInputCreate} from "../../generated/prismabox/Post";

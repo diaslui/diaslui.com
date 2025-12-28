@@ -1,5 +1,5 @@
 import { Elysia } from "elysia";
-import { renderEjs } from "../pages/services/pages.service";
+import { ejsResponse } from "../pages/services/pages.service";
 import { allAuthTokenMiddleware } from "../auth/middlewares";
 
 const adminRoutes = new Elysia({ prefix: "/admin" }).guard(
@@ -9,8 +9,8 @@ const adminRoutes = new Elysia({ prefix: "/admin" }).guard(
     },
   },
   (app) =>
-    app.get("/posts", ({ body }) => {
-      return renderEjs("admin/posts");
+    app.get("", ({ body }) => {
+      return ejsResponse("admin/hub");
     })
 );
 

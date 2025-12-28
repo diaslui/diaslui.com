@@ -3,13 +3,18 @@ import { readFile } from "fs/promises";
 import path from "path";
 
 
-export const renderEjs = async (view, data = {}): Promise<string> => {
+export const ejsResponse = async (view, data = {}): Promise<Response> => {
   const filePath = path.join(import.meta.dir, "../../../../public/views/", `${view}.ejs`);
   const file = await readFile(
     filePath,
     "utf8"
   );
-  return ejs.render(file, data ,{
+
+   return new Response(ejs.render(file, data ,{
      filename: filePath,
+  }), {
+    headers: {
+      "Content-Type": "text/html",
+    },
   });
 };

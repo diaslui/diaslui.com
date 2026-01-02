@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+    <title>diaslui: sign in</title>
+    <meta name="description"
+        content="Sign in to the admin panel of diaslui.com to manage content and access exclusive features.">
+    
+    <%-include("../partials/head")-%>
+
+</head>
+<body class="bg-primary-50 dark:bg-bgdark text-slate-900 dark:text-slate-100 min-h-screen grid-background">
+      
+    <%-include("../partials/header")-%>
+
+       <div style="display: none;" id="content-preview" class="bg-white absolute w-full min-h-screen dark:bg-bgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+          <h3 class=" text-xl font-bold mb-4">Content Preview</h3>
+          <div id="markdownPreview" class="markdown-preview prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-400">
+            <p class="text-slate-400 dark:text-slate-500 italic">The preview will appear here as you type...</p>
+          </div>
+        </div>
+    
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid lg:grid-cols-12 gap-8">
+      
+      <div class="lg:col-span-7 space-y-6">
+        <div class="bg-white dark:bg-bgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+          <h2 class="text-2xl font-bold mb-6">
+            <span id="editorTitle">Build a new post</span>
+          </h2>
+          
+          <form id="postForm" class="space-y-6">
+            <input type="hidden" id="postId" value="">
+            
+            <div>
+              <label class="block text-sm font-medium mb-2">Title</label>
+              <input 
+                type="text" 
+                id="postTitle" 
+                placeholder="A beautiful title..."
+                class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                required
+              >
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">Cover Image</label>
+              <div class="space-y-3">
+                <input 
+                  type="file" 
+                  id="postImage" 
+                  accept="image/*"
+                  class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer"
+                  onchange="previewImage(event)"
+                >
+                <div id="imagePreview" class="hidden">
+                  <img id="previewImg" src="/placeholder.svg" alt="Preview" class="w-full h-48 object-cover rounded-lg border border-slate-200 dark:border-slate-700">
+                  <button type="button" onclick="removeImage()" class="mt-2 text-sm text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+                    Remove Image
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">Tags</label>
+              <div id="tagsContainer" class="tag-input border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+                <input 
+                  type="text" 
+                  id="tagInput" 
+                  placeholder="Enter a tag and press Enter..."
+                  class="flex-1 min-w-[200px] bg-transparent border-none outline-none"
+                  onkeydown="handleTagInput(event)"
+                >
+              </div>
+              <p class="text-xs text-slate-500 mt-1">Press Enter to add a tag</p>
+            </div>
+
+
+            <div class="flex items-center gap-2">
+              <input 
+                type="checkbox" 
+                id="postPinned" 
+                class="w-4 h-4 text-primary-600 bg-slate-100 border-slate-300 rounded focus:ring-primary-500 dark:bg-slate-800 dark:border-slate-600"
+              >
+              <label for="postPinned" class="text-sm font-medium">Pin this post</label>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">Content (Markdown)</label>
+              <textarea 
+                id="postContent" 
+                rows="12"
+                placeholder="Type the content in markdown...&#10;&#10;## Example title&#10;&#10;This is a paragraph with **bold** and *italic*.&#10;&#10;- Item 1&#10;- Item 2"
+                class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent font-mono text-sm"
+                oninput="updatePreview()"
+                required
+              ></textarea>
+            </div>
+
+            <div class="flex gap-3">
+              <button 
+                type="submit" 
+                class="flex-1 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-colors"
+              >
+                <span id="submitButtonText">Publish Post</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="cancelEdit()"
+                class="px-6 py-3 bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium rounded-lg transition-colors"
+              >
+                Clear Editor
+              </button>
+            </div>
+          </form>
+        </div>
+
+     
+
+      </div>
+
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-white dark:bg-bgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold">All Posts</h3>
+            <span id="postCount" class="text-sm text-slate-500">0 posts</span>
+          </div>
+          
+          <div id="postsList" class="space-y-4">
+           
+
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-primary-500/10 to-accent-600/10 dark:from-primary-500/20 dark:to-accent-600/20 border border-primary-500/20 dark:border-primary-500/30 rounded-2xl p-6">
+          <h3 class="font-semibold mb-4">Statistics</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-slate-600 dark:text-slate-400">Total Posts</span>
+              <span id="statTotal" class="font-bold text-primary-600 dark:text-primary-400">0</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-slate-600 dark:text-slate-400">Pinned Posts</span>
+              <span id="statPinned" class="font-bold text-accent-600 dark:text-accent-400">0</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/scripts/admin/posts.js" ></script>
+</body>
+</html>

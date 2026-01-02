@@ -10,6 +10,9 @@ dist
 coverage
 *.lcov
 
+#js bundles
+/public/js/**/*.js
+
 # logs
 logs
 _.log

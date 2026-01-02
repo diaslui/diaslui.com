@@ -9,9 +9,10 @@ const adminRoutes = new Elysia({ prefix: "/admin" }).guard(
     },
   },
   (app) =>
-    app.get("", ({ body }) => {
-      return ejsResponse("admin/hub");
-    })
+    app
+  .get("", () => ejsResponse("admin/hub"))
+  .get("/posts", () => ejsResponse("admin/posts"))
+
 );
 
 export default adminRoutes;

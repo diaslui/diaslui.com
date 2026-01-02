@@ -12,7 +12,7 @@ new Elysia()
       hostname: "0.0.0.0",
     },
     () => {
-      initWorkers();
+     
       console.log(`running at http://0.0.0.0:3000`);
     }
   )

@@ -31,8 +31,8 @@
 
 .dark .grid-background {
   background-image:
-    linear-gradient(to right, rgba(85, 51, 67, 0.122) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(85, 51, 76, 0.152) 1px, transparent 1px);
+    linear-gradient(to right, rgba(85, 51, 67, 0.279) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(85, 51, 76, 0.223) 1px, transparent 1px);
 }
 
 * {

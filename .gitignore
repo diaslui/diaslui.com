@@ -9,6 +9,8 @@ dist
 # code coverage
 coverage
 *.lcov
+/public/scripts/test.js
+/public/img/pictures
 
 #js bundles
 /public/js/**/*.js

@@ -1,4 +1,3 @@
-
 const toggleTheme = () => {
   document.documentElement.classList.toggle("dark");
   const isDark = document.documentElement.classList.contains("dark");
@@ -23,5 +22,15 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   updateThemeIcons(isDark);
-  document.querySelector(".theme-toggle").addEventListener("click", toggleTheme);
+  document
+    .querySelector(".theme-toggle")
+    .addEventListener("click", toggleTheme);
+
+  const thisYearSpans = document.querySelectorAll(".this-year");
+  if (thisYearSpans) {
+    const currentYear = new Date().getFullYear();
+    thisYearSpans.forEach((span) => {
+      span.textContent = currentYear;
+    });
+  }
 });

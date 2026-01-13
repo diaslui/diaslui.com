@@ -3,7 +3,6 @@ import process from "node:process";
 import path from "path";
 import { fileURLToPath } from "url";
 import { Redis } from "@upstash/redis";
-process.loadEnvFile(".env");
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL!,
@@ -14,14 +13,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const __rootdir = path.join(__dirname, "..");
 
-const PORT = 3000;
-const server = express();
+process.loadEnvFile(path.join(__rootdir, ".env"));
 
-server.use("/assets", express.static(path.join(__rootdir, "public")));
-server.set("views", path.join(__dirname, "views"));
-server.set("view engine", "ejs");
 
-server.use((req, res, next) => {
+const app = express();
+
+app.use("/assets", express.static(path.join(__rootdir, "public")));
+app.set("views", path.join(__rootdir, "views"));
+app.set("view engine", "ejs");
+
+app.use((req, res, next) => {
   res.on("finish", () => {
     if (res.statusCode < 400) {
       if (!req.path.startsWith("/assets")) {
@@ -35,7 +36,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.get("/stats", async (req, res) => {
+app.get("/stats", async (req, res) => {
   const totalReqs = await redis.get("site:requests:total");
 
   res.json({
@@ -43,14 +44,19 @@ server.get("/stats", async (req, res) => {
   });
 });
 
-server.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.render("index");
 });
 
-server.get("/links", (req, res) => {
+app.get("/links", (req, res) => {
   res.render("linktree");
 });
 
-server.listen(PORT, "0.0.0.0", () => {
-  console.log(`listening on 0.0.0.0:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production'){
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

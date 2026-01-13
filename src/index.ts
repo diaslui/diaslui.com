@@ -4,10 +4,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { Redis } from "@upstash/redis";
 
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,6 +11,10 @@ const __rootdir = path.join(__dirname, "..");
 
 process.loadEnvFile(path.join(__rootdir, ".env"));
 
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
 
 const app = express();
 
@@ -23,6 +23,11 @@ app.set("views", path.join(__rootdir, "views"));
 app.set("view engine", "ejs");
 
 app.use((req, res, next) => {
+  if (process.env.NODE_ENV !== 'production'){
+    next();
+    return;
+  }
+
   res.on("finish", () => {
     if (res.statusCode < 400) {
       if (!req.path.startsWith("/assets")) {

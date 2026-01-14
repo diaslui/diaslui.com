@@ -23,7 +23,6 @@
   "dependencies": {
     "@upstash/redis": "^1.36.1",
     "ejs": "^3.1.10",
-    "express": "^5.2.1",
-    "serverless-http": "^4.0.0"
+    "express": "^5.2.1"
   }
 }

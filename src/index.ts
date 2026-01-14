@@ -2,7 +2,7 @@ import express from "express";
 import process from "node:process";
 import path from "path";
 import { fileURLToPath } from "url";
-import redis  from "../src/redis";
+import redis  from "./redis";
 import apiRoutes from "./services/api/routes";
 import coreRoutes from "./services/core/routes";
 
@@ -30,5 +30,5 @@ if (process.env.NODE_ENV !== 'production'){
     console.log(`running on http://localhost:3000`);
   });
 }
-
+console.log("inited..");
 export default app;

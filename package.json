@@ -3,14 +3,12 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "bun run src/index.ts",
+    "deploy": "npm run build && vercel --prod",
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "dev:css": "npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/output.css --watch",
-    "test": "bun test"
+    "dev:css": "npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/output.css --watch"
   },
   "devDependencies": {
-    "@netlify/functions": "^5.1.2",
     "@types/express": "^5.0.6",
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",

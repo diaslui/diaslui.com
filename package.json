@@ -6,7 +6,7 @@
     "start": "bun run src/index.ts",
     "dev": "node --watch src/index.ts",
     "build": "tsc",
-    "dev:css": "bunx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/output.css --watch",
+    "dev:css": "npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/output.css --watch",
     "test": "bun test"
   },
   "devDependencies": {

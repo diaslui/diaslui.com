@@ -53,6 +53,15 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+
+
+app.get("/source", (req, res) => {
+  res.redirect("https://github.com/diaslui/diaslui.com");
+});
+
 app.get("/links", (req, res) => {
   res.render("linktree");
 });

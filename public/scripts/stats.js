@@ -5,7 +5,7 @@ const calculatePorcent = (value, goal) => {
 
 const loadStats = async () => {
   try {
-    const res = await fetch("/stats");
+    const res = await fetch("/api/stats");
     const data = await res.json();
 
     const total = Number(data.totalRequests ?? 0);

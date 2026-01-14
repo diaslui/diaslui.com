@@ -30,5 +30,11 @@ if (process.env.NODE_ENV !== 'production'){
     console.log(`running on http://localhost:3000`);
   });
 }
-console.log("inited..");
+
+
+app.use((req, res, next) => {
+  res.status(404).render('404'); 
+});
+
+
 export default app;

@@ -2,9 +2,9 @@ import express from "express";
 import process from "node:process";
 import path from "path";
 import { fileURLToPath } from "url";
-import redis  from "./redis";
-import apiRoutes from "./services/api/routes";
-import coreRoutes from "./services/core/routes";
+import redis  from "./redis.js";
+import apiRoutes from "./services/api/routes.js";
+import coreRoutes from "./services/core/routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {countVisitsMiddleware} from "./middlewares";
+import {countVisitsMiddleware} from "./middlewares.js";
 import { Request, Response } from "express";
 
 const router = Router();

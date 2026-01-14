@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import redis from "../../redis";
+import redis from "../../redis.js";
 
 export const countVisitsMiddleware = (
   req: Request,

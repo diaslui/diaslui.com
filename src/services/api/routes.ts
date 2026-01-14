@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Request, Response } from "express";
-import redis from "../../redis";
-import youtube from "../../utils/youtube";
+import redis from "../../redis.js";
+import youtube from "../../utils/youtube.js";
 
 const router = Router();
 

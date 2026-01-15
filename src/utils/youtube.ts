@@ -1,12 +1,8 @@
-const ytApiKey = process.env.YOUTUBE_API_KEY;
-const channelId = process.env.YOUTUBE_CHANNEL_ID;
-
 const youtube = {
-  getLastVideos: async ({
-    videosCount,
-  }: {
-    videosCount: number;
-  }) => {
+  getLastVideos: async ({ videosCount }: { videosCount: number }) => {
+    const ytApiKey = process.env.YOUTUBE_API_KEY;
+    const channelId = process.env.YOUTUBE_CHANNEL_ID;
+
     if (!ytApiKey) {
       return undefined;
     }

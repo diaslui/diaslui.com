@@ -1,3 +1,77 @@
+const timeago = (date) => {
+  const now = new Date();
+  const secondsPast = (now.getTime() - new Date(date).getTime()) / 1000;
+  if (secondsPast < 60) {
+    return `${parseInt(secondsPast)}s ago`;
+  }
+  if (secondsPast < 3600) {
+    return `${parseInt(secondsPast / 60)}m ago`;
+  }
+  if (secondsPast <= 86400) {
+    return `${parseInt(secondsPast / 3600)}h ago`;
+  }
+  if (secondsPast > 86400) {
+    const day = new Date(date).getDate();
+    const month = new Date(date).toLocaleString("default", { month: "short" });
+    const year = new Date(date).getFullYear() === now.getFullYear() ? "" : ` ${new Date(date).getFullYear()}`;
+    return `${day} ${month}${year}`;
+  }
+};
+
+const loadLastPosts = async () => {
+  const container = document.getElementById("last-posts-div");
+  if (!container) return;
+
+  try {
+    const res = await fetch("https://raw.githubusercontent.com/luiisp/blog-storage-diaslui.com/refs/heads/master/posts/latest.json");
+    const data = await res.json();
+
+    console.log(data);  
+
+    data.forEach((post) => {
+
+      const description =
+        post.description.substring(0, 255) +
+        (post.description.length > 255 ? "..." : "");
+      const thumb = "https://raw.githubusercontent.com/luiisp/blog-storage-diaslui.com/refs/heads/master" + post.image;
+
+      const a = document.createElement("a");
+      a.href = `/read/${post.id}`;
+  
+      a.className =
+        "group bg-subglight dark:bg-subgdark rounded-2xl overflow-hidden hover-lift";
+
+      a.innerHTML = `
+          <div class="relative aspect-video overflow-hidden">
+            <img src="${thumb}" alt="Post Cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
+              <span>5 min</span>
+              <span>-</span>
+              <span>${timeago(post.date)}</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              ${post.title}
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-3">
+              ${description}
+            </p>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded text-xs font-medium">Backend</span>
+              <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded text-xs font-medium">Architecture</span>
+            </div>
+          </div>
+      `;
+
+      container.appendChild(a);
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
 const loadYoutubeVideos = async () => {
   const container = document.getElementById("yt-videos-div");
   if (!container) return;
@@ -63,6 +137,7 @@ const loadYoutubeVideos = async () => {
 };
 
 const homeInit = () => {
+  loadLastPosts();
   loadYoutubeVideos();
 };
 

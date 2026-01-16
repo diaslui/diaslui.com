@@ -24,21 +24,25 @@
 
 .grid-background {
   background-size: 202px 202px;
-  background-image:
-    linear-gradient(to right, rgba(124, 117, 120, 0.186) 1px, transparent 1px),
+  background-image: linear-gradient(
+      to right,
+      rgba(124, 117, 120, 0.186) 1px,
+      transparent 1px
+    ),
     linear-gradient(to bottom, rgba(124, 117, 120, 0.186) 1px, transparent 1px);
 }
 
 .dark .grid-background {
-  background-image:
-    linear-gradient(to right, rgba(85, 51, 67, 0.279) 1px, transparent 1px),
+  background-image: linear-gradient(
+      to right,
+      rgba(85, 51, 67, 0.279) 1px,
+      transparent 1px
+    ),
     linear-gradient(to bottom, rgba(85, 51, 76, 0.223) 1px, transparent 1px);
 }
 
 * {
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
+  transition: background-color 0.3s ease, border-color 0.3s ease,
     color 0.3s ease;
 }
 
@@ -86,9 +90,7 @@
     #cc2366 75%,
     #bc1888 100%
   );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: rotate-gradient 3s linear infinite;
@@ -130,9 +132,7 @@
 }
 
 * {
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
+  transition: background-color 0.3s ease, border-color 0.3s ease,
     color 0.3s ease;
 }
 
@@ -260,4 +260,22 @@
 .management-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: var(--width-progress, 1px);
+  width: var(--header-progress, 100%);
+  background: linear-gradient(
+    to right,
+    #FFBD00,
+    #FF3E2B,
+    #0086FB,
+    #00AB3F
+  );
+  pointer-events: none;
+   transition: width 0.1s ease;
 }

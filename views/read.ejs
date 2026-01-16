@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+
+
+  <%-include("./partials/head")-%>
+    <title>DiasLui | Software Engineer & Open Source</title>
+    <meta name="description"
+      content="I'm Pedro Luis D., a Software Engineer from Brazil. This is my personal website where I share my insights, projects, and more.">
+
+
+    <script src="/assets/scripts/global.js"></script>
+
+    <script src="/assets/scripts/read.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+
+<body class="bg-slate-50 dark:bg-bgdark text-slate-900 dark:text-slate-100 min-h-screen grid-background">
+  <%-include("./partials/header")-%>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+        <article class="flex-1 max-w-4xl">
+
+          <div class="mb-8 sm:mb-12 reveal">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Article</span>
+            </div>
+
+            <h1 class="article-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+
+            </h1>
+
+            <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-slate-600 dark:text-slate-400 mb-6">
+              <div class="flex items-center gap-3">
+                <img src="/assets/img/pictures/thc.jpg" alt="Luis Dias" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-medium text-slate-900 dark:text-slate-100">Luis Dias</p>
+                  <p class="text-sm">@diaslui</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5 text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="article-date"> </span>
+              </div>
+              <div class="flex items-center gap-1.5 text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>12 min</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                  </path>
+                </svg>
+                <span>1.2k views</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="prose prose-slate dark:prose-invert max-w-none reveal" id="articleContent">
+
+          </div>
+        </article>
+
+        <aside class="hidden lg:block w-72 xl:w-80 flex-shrink-0">
+          <div class="sticky top-24 space-y-6">
+
+            <div
+              class="bg-gradient-to-br from-primary-500/10 to-accent-500/10 dark:from-subgdark dark:via-subgdark dark:to-accent-500/20 rounded-2xl border border-primary-500/20 p-6">
+              <h3 class="font-bold mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7">
+                  </path>
+                </svg>
+                Article Summary
+              </h3>
+              <nav id="tableOfContents" class="space-y-1 text-sm">
+              </nav>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-primary-500/10 to-accent-500/10 dark:from-primary-500/20 dark:to-accent-500/20 rounded-2xl border border-primary-500/20 p-6">
+              <h3 class="font-bold mb-2">Newsletter</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Receive updates about new articles and
+                projects.
+              </p>
+              <form class="space-y-3 pointer-events-none opacity-40">
+                <input type="email" placeholder="seu@email.com"
+                  class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm">
+                <button type="submit"
+                  class="w-full px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium text-sm transition-colors">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+              <h3 class="font-bold mb-4">Article Tags</h3>
+              <div class="flex flex-wrap gap-2">
+                <a href="/"
+                  class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg text-sm transition-colors">Article</a>
+
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <%-include("./partials/footer")-%>
+
+      <script>
+        postId = "<%= postId %>";
+        getPost(postId);
+      </script>
+</body>
+
+</html>

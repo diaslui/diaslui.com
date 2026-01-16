@@ -1,22 +1,4 @@
-const timeago = (date) => {
-  const now = new Date();
-  const secondsPast = (now.getTime() - new Date(date).getTime()) / 1000;
-  if (secondsPast < 60) {
-    return `${parseInt(secondsPast)}s ago`;
-  }
-  if (secondsPast < 3600) {
-    return `${parseInt(secondsPast / 60)}m ago`;
-  }
-  if (secondsPast <= 86400) {
-    return `${parseInt(secondsPast / 3600)}h ago`;
-  }
-  if (secondsPast > 86400) {
-    const day = new Date(date).getDate();
-    const month = new Date(date).toLocaleString("default", { month: "short" });
-    const year = new Date(date).getFullYear() === now.getFullYear() ? "" : ` ${new Date(date).getFullYear()}`;
-    return `${day} ${month}${year}`;
-  }
-};
+
 
 const loadLastPosts = async () => {
   const container = document.getElementById("last-posts-div");
@@ -36,7 +18,7 @@ const loadLastPosts = async () => {
       const thumb = "https://raw.githubusercontent.com/luiisp/blog-storage-diaslui.com/refs/heads/master" + post.image;
 
       const a = document.createElement("a");
-      a.href = `/read/${post.id}`;
+      a.href = `/read/${post.filename.split(".md")[0]}`;
   
       a.className =
         "group bg-subglight dark:bg-subgdark rounded-2xl overflow-hidden hover-lift";
@@ -58,8 +40,7 @@ const loadLastPosts = async () => {
               ${description}
             </p>
             <div class="flex items-center gap-2">
-              <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded text-xs font-medium">Backend</span>
-              <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded text-xs font-medium">Architecture</span>
+              <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded text-xs font-medium">Article</span>
             </div>
           </div>
       `;

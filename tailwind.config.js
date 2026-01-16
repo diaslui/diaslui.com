@@ -5,7 +5,7 @@ export default {
     "./views/**/*.ejs",
     "./views/*.ejs",
     "./views/views/**/*.ejs",
-    "./views/scripts/**/*.js",
+    "./public/scripts/*.js",
   ],
   theme: {
     extend: {

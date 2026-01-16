@@ -43,7 +43,7 @@ const loadLastPosts = async () => {
 
       a.innerHTML = `
           <div class="relative aspect-video overflow-hidden">
-            <img src="${thumb}" alt="Post Cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            <img src="${thumb}" alt="Post Cover" class="w-full group-hover:brightness-90 h-full object-cover group-hover:scale-105 transition-transform duration-300">
           </div>
           <div class="p-5">
             <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
@@ -71,7 +71,6 @@ const loadLastPosts = async () => {
   }
 };
 
-
 const loadYoutubeVideos = async () => {
   const container = document.getElementById("yt-videos-div");
   if (!container) return;
@@ -98,7 +97,7 @@ const loadYoutubeVideos = async () => {
       a.target = "_blank";
       a.rel = "noopener";
       a.className =
-        "group bg-subglight dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden hover-lift sm:col-span-2 lg:col-span-1";
+        "group bg-subglight dark:bg-subgdark border border-slate-200 dark:border-slate-800  rounded-2xl overflow-hidden hover-lift sm:col-span-2 lg:col-span-1";
 
       a.innerHTML = `
         <div class="relative aspect-video">
@@ -106,7 +105,7 @@ const loadYoutubeVideos = async () => {
             src="${thumb}" 
             alt="${title}" 
             loading="lazy"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-50 transition-transform duration-300"
           >
           <div class="absolute inset-0 video-overlay"></div>
 

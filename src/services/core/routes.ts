@@ -12,7 +12,18 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.get("/about", (req: Request, res: Response) => {
-  res.render("about");
+  res.render("about", {
+    title: "About Me",
+    description:
+      "Learn more about Luis, a software developer passionate about coding and technology.",
+  });
+});
+
+router.get("/articles", (req: Request, res: Response) => {
+  res.render("articles", {
+    title: "Articles",
+    description: "Read articles about programming, technology, and more.",
+  });
 });
 
 router.get("/read/:postId", async (req: Request, res: Response) => {
@@ -56,7 +67,10 @@ router.get("/source", (req: Request, res: Response) => {
 });
 
 router.get("/links", (req: Request, res: Response) => {
-  res.render("linktree");
+  res.render("linktree", {
+    title: "Links",
+    description: "Connect with me on various platforms.",
+  });
 });
 
 export default router;

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+
+
+    <%-include("./partials/head")-%>
+        <title><%= title %> | Diaslui</title>
+        <meta name="description"
+            content="<%= description %>">
+
+
+        <script src="/assets/scripts/global.js"></script>
+        <script src="/assets/scripts/articles.js"></script>
+
+</head>
+
+<body class="bg-bglight dark:bg-bgdark text-slate-900 dark:text-slate-100 min-h-screen grid-background">
+
+    <%-include("./partials/header")-%>
+        
+
+  
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+    
+    <div class="mb-8 sm:mb-12">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Articles</h1>
+      <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
+        Articles about programming, technology, and more, written by Luis Dias.
+        </p>
+        <span class="text-sm text-accent-500 font-black mt-2 block">Everything on this site is written by me, not AI.</span>
+    </div>
+
+    <div class="bg-white dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-6 mb-8">
+      <div class="flex flex-col lg:flex-row gap-4">
+        <div class="flex-1 relative">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input 
+            type="text" 
+            placeholder="Search articles for an article here" 
+            class="articles-search w-full pl-12 pr-4 py-3 bg-bglight dark:bg-bgdark border border-primary-200 dark:border-primary-700 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+          >
+        </div>
+    
+      </div>
+    </div>
+
+    <section class="articles-pinned-section mb-10 sm:mb-12">
+      <div class="flex items-center gap-2 mb-6">
+           <div class="">
+        </div>
+        <h2 class="text-xl sm:text-2xl font-bold">Pinned Articles!</h2>
+      </div>
+      
+      <div class="articles-pinned grid sm:grid-cols-2 gap-4 sm:gap-6">
+       
+
+      </div>
+    </section>
+
+
+    <section>
+      <div class="flex font-bold items-center justify-between mb-6">
+        <h2 class="text-xl sm:text-2xl font-bold">Articles Results</h2>
+        <span id="postCount" class="text-sm text-slate-500 dark:text-slate-500"><span class="articles-display-count"></span> articles</span>
+      </div>
+      
+      <div class="articles-results grid gap-4 sm:gap-6">
+
+      
+        
+      </div>
+
+      <div class="articles-empty-display hidden text-center py-16">
+        <div class="w-16 h-16 mx-auto mb-4 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
+          <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">No posts found</h3>
+        <p class="text-slate-600 dark:text-slate-400">Try using different search terms.</p>
+      </div>
+
+      <div class=" text-center mt-8">
+        <button class="articles-load-more px-8 py-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl font-medium transition-colors inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Load More Articles
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+        <%-include("./partials/footer")-%>
+
+</body>
+
+</html>

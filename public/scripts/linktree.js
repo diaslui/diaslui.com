@@ -35,6 +35,11 @@ const socialUrls = [
     openInNewTab: true,
   },
   {
+    name: "blog",
+    url: "https://diaslui.com/articles",
+    openInNewTab: false,
+  },
+  {
     name: "thisGithubRepo",
     url: "https://github.com/diaslui/diaslui.com",
     openInNewTab: true,

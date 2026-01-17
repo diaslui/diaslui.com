@@ -160,8 +160,12 @@ const showArticlesContainerPinned = (articles, container) => {
 
 const displayPinnedArticles = async () => {
   const pinnedArticles = articlesData.filter(
-    (article) => article.pinned === false,
+    (article) => article.pinned === true,
   );
+  if (pinnedArticles.length === 0) {
+    domRefs.articlesPinnedSection.style.display = "none";
+    return;
+  }
 
   showArticlesContainerPinned(pinnedArticles, domRefs.articlesPinned);
 };
@@ -179,7 +183,11 @@ const inputSearch = (e) => {
   if (val.length >= 1) {
     domRefs.articlesPinnedSection.style.display = "none";
   } else {
-    domRefs.articlesPinnedSection.style.display = "";
+    if (articlesData.filter((article) => article.pinned === true).length === 0) {
+      domRefs.articlesPinnedSection.style.display = "none";
+    } else {
+      domRefs.articlesPinnedSection.style.display = "";
+    }
   }
   const filteredArticles = articlesData.filter((article) => {
     return article.title.toLowerCase().includes(val.toLowerCase());

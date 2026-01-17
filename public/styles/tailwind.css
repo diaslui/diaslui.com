@@ -24,25 +24,21 @@
 
 .grid-background {
   background-size: 202px 202px;
-  background-image: linear-gradient(
-      to right,
-      rgba(124, 117, 120, 0.186) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(to right, rgba(124, 117, 120, 0.186) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(124, 117, 120, 0.186) 1px, transparent 1px);
 }
 
 .dark .grid-background {
-  background-image: linear-gradient(
-      to right,
-      rgba(85, 51, 67, 0.279) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(to right, rgba(85, 51, 67, 0.279) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(85, 51, 76, 0.223) 1px, transparent 1px);
 }
 
 * {
-  transition: background-color 0.3s ease, border-color 0.3s ease,
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
     color 0.3s ease;
 }
 
@@ -90,7 +86,9 @@
     #cc2366 75%,
     #bc1888 100%
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: rotate-gradient 3s linear infinite;
@@ -124,15 +122,17 @@
 }
 
 .pinned-glow {
-  box-shadow: 0 0 20px rgba(233, 14, 61, 0.3);
+  box-shadow: 0 0 40px rgba(233, 14, 109, 0.3);
 }
 
 .dark .pinned-glow {
-  box-shadow: 0 0 20px rgba(233, 14, 80, 0.2);
+  box-shadow: 0 0 40px rgba(233, 14, 105, 0.2);
 }
 
 * {
-  transition: background-color 0.3s ease, border-color 0.3s ease,
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
     color 0.3s ease;
 }
 
@@ -263,19 +263,110 @@
 }
 
 header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   height: var(--width-progress, 1px);
   width: var(--header-progress, 100%);
-  background: linear-gradient(
-    to right,
-    #FFBD00,
-    #FF3E2B,
-    #0086FB,
-    #00AB3F
-  );
+  background: linear-gradient(to right, #ffbd00, #ff3e2b, #0086fb, #00ab3f);
   pointer-events: none;
-   transition: width 0.1s ease;
+  transition: width 0.1s ease;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+.pulse-ring::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  animation: pulse-ring 2s ease-out infinite;
+}
+.gradient-text {
+  background: linear-gradient(135deg, #ffbd00, #ff3e2b, #0086fb, #00ab3f);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.gradient-text-2 {
+  background: linear-gradient(135deg, #3178C6, #F8295C, #7e31c6);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+}
+.dark .card-hover:hover {
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
+}
+.pinned-badge {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+.tag-hover {
+  transition: all 0.2s ease;
+}
+.tag-hover:hover {
+  transform: scale(1.05);
+}
+.search-glow:focus {
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+.dark .search-glow:focus {
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+}
+.stat-card {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
+}
+.dark .stat-card {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.15),
+    rgba(139, 92, 246, 0.15)
+  );
 }

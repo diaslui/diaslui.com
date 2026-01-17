@@ -13,9 +13,28 @@ const timeago = (date) => {
   if (secondsPast > 86400) {
     const day = new Date(date).getDate();
     const month = new Date(date).toLocaleString("default", { month: "short" });
-    const year = new Date(date).getFullYear() === now.getFullYear() ? "" : ` ${new Date(date).getFullYear()}`;
+    const year =
+      new Date(date).getFullYear() === now.getFullYear()
+        ? ""
+        : ` ${new Date(date).getFullYear()}`;
     return `${day} ${month}${year}`;
   }
+};
+
+const formatHumanNumber = (value) => {
+  if (value < 1000) return value.toString();
+
+  const units = ["", "K", "M", "B", "T", "Q", "Qi", "Sx", "Sp", "Oc", "No"];
+
+  let unitIndex = 0;
+  let num = value;
+
+  while (num >= 1000 && unitIndex < units.length - 1) {
+    num /= 1000;
+    unitIndex++;
+  }
+
+  return `${num.toFixed(num < 10 ? 1 : 0)}${units[unitIndex]}`;
 };
 
 const toggleTheme = () => {

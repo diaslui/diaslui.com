@@ -5,7 +5,7 @@ const calculatePorcent = (value, goal) => {
 
 const loadStats = async () => {
   try {
-    const res = await fetch("/api/stats");
+    const res = await fetch("/api/stats/total");
     const data = await res.json();
 
     const total = Number(data.totalRequests ?? 0);
@@ -48,22 +48,6 @@ const loadStats = async () => {
   } catch (err) {
     console.error("Failed to load stats", err);
   }
-};
-
-const formatHumanNumber = (value) => {
-  if (value < 1000) return value.toString();
-
-  const units = ["", "K", "M", "B", "T", "Q", "Qi", "Sx", "Sp", "Oc", "No"];
-
-  let unitIndex = 0;
-  let num = value;
-
-  while (num >= 1000 && unitIndex < units.length - 1) {
-    num /= 1000;
-    unitIndex++;
-  }
-
-  return `${num.toFixed(num < 10 ? 1 : 0)}${units[unitIndex]}`;
 };
 
 const calculateNextGoal = (value) => {

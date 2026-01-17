@@ -19,10 +19,9 @@ const updateReadingProgress = () => {
   let percentage = ((scrollY - start) / (end - start)) * 100;
   percentage = Math.max(0, Math.min(100, percentage));
 
-
   header.style.setProperty("--header-progress", `${percentage}%`);
   header.style.setProperty("--width-progress", `2.5px`);
-}
+};
 
 const generateTOC = () => {
   const content = document.getElementById("articleContent");
@@ -52,8 +51,11 @@ const generateTOC = () => {
   });
 };
 
-const renderArticle = (md) => {
+const renderArticle = () => {
   const container = document.getElementById("articleContent");
+  const body = JSON.parse(
+    document.getElementById("articleContent").textContent
+  );
 
   marked.setOptions({
     highlight: function (code, lang) {
@@ -66,7 +68,7 @@ const renderArticle = (md) => {
     gfm: true,
   });
 
-  container.innerHTML = marked.parse(md);
+  container.innerHTML = marked.parse(body);
 
   container.querySelectorAll("pre").forEach((pre) => {
     pre.style.position = "relative";
@@ -77,78 +79,39 @@ const renderArticle = (md) => {
     btn.onclick = () => copyCode(pre, btn);
     pre.appendChild(btn);
   });
-};
 
-const updatePost = (md, meta) => {
-  domUpdateAllText(".article-title", meta.title);
-  domUpdateAllText(".article-date", timeago(meta.date));
-  domUpdateAllText(".article-author", meta.author || "Diaslui");
-  domUpdateAllText(".article-reading-time", meta.readingTime || "5 min read");
-
-  renderArticle(md);
   generateTOC();
 };
 
-const parseMarkdown = (md) => {
-  if (!md.startsWith("---")) {
-    return { meta: {}, content: md };
+const estimateReadingTime = (text) => {
+  const wordsPerMinute = 260;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
+};
+
+const getViewsCount = async (postId) => {
+  try {
+    const res = await fetch(`/api/stats/read:${postId}`);
+    const data = await res.json();
+    return Number(data.totalRequests ?? 0);
+  } catch (err) {
+    console.error("Failed to load views count", err);
+    return 0;
   }
+};
 
-  const end = md.indexOf("\n---", 3);
-  if (end === -1) {
-    return { meta: {}, content: md };
-  }
+const updatePostMeta = (header) => {
+  domUpdateAllText(".article-date", timeago(header.date));
+  domUpdateAllText(
+    ".article-reading-time",
+    estimateReadingTime(document.getElementById("articleContent").textContent)
+  );
 
-  const rawMeta = md.slice(3, end).trim();
-  const content = md.slice(end + 4).trim();
-
-  const meta = {};
-
-  rawMeta.split("\n").forEach((line) => {
-    if (!line.includes(":")) return;
-
-    const idx = line.indexOf(":");
-    const key = line.slice(0, idx).trim();
-    let value = line.slice(idx + 1).trim();
-
-    if (
-      (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
-      value = value.slice(1, -1);
-    }
-
-    if (value === "true") value = true;
-    if (value === "false") value = false;
-
-    meta[key] = value;
+  getViewsCount(header.filename.split(".")[0]).then((views) => {
+    document.querySelector(".article-views-parent").classList.remove("opacity-0");
+    domUpdateAllText(".article-views", `${formatHumanNumber(views)} views`);
   });
-
-  return { meta, content };
-};
-
-const getMarkdownBody = (md) => {
-  const parts = md.split("---");
-
-  if (parts.length < 3) {
-    return md;
-  }
-
-  return parts.slice(2).join("---").trim();
-};
-
-const getPost = async (filename) => {
-  const url = `https://raw.githubusercontent.com/luiisp/blog-storage-diaslui.com/refs/heads/master/posts/${encodeURIComponent(
-    filename
-  )}.md`;
-
-  const res = await fetch(url);
-  if (!res.ok) return;
-
-  const md = await res.text();
-  const post = parseMarkdown(md);
-
-  updatePost(getMarkdownBody(md), post.meta);
 };
 
 const initRead = () => {};

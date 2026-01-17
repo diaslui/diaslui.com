@@ -3,21 +3,55 @@
 
 <head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <%-include("./partials/head")-%>
-    <title>DiasLui | Software Engineer & Open Source</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="https://diaslui.com/assets/img/favicon-48x48.png"
+    />
+    <link rel="icon" type="image/png" href="https://diaslui.com/assets/img/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="https://diaslui.com/assets/img/favicon.svg" />
+    <link rel="shortcut icon" href="https://diaslui.com/assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://diaslui.com/assets/img/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Diaslui" />
+    <link rel="manifest" href="https://diaslui.com/assets/img/site.webmanifest" />
+
+    <meta property="og:title" content="<%= header.title %> | Diaslui" />
+    <meta property="og:description"
+      content="<%= header.description %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://diaslui.com/" />
+
+    <meta property="og:image" content="<%= header.imgUrl %>" />
+
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Diaslui Logo" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="<%= header.imgUrl %>" />
+    <link rel="canonical" href="https://diaslui.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Pedro Luis Dias">
+    <meta name="keywords" content="Software Engineer, Backend Developer, Python, C++, Brazil">
+    <meta name="theme-color" content="#3178C6">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="stylesheet" href="/assets/styles/output.css">
+    <title><%= header.title %></title>
     <meta name="description"
-      content="I'm Pedro Luis D., a Software Engineer from Brazil. This is my personal website where I share my insights, projects, and more.">
+      content="<%= header.description %>">
 
 
     <script src="/assets/scripts/global.js"></script>
-
     <script src="/assets/scripts/read.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 </head>
 
-<body class="bg-slate-50 dark:bg-bgdark text-slate-900 dark:text-slate-100 min-h-screen grid-background">
+<body class="bg-slate-50 dark:bg-bgdark text-slate-900 dark:text-slate-100 min-h-screen ">
   <%-include("./partials/header")-%>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -32,7 +66,7 @@
             </div>
 
             <h1 class="article-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-
+              <%= header.title %>
             </h1>
 
             <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-slate-600 dark:text-slate-400 mb-6">
@@ -48,16 +82,18 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-                <span class="article-date"> </span>
+                <span class="article-date">
+                  <%= header.date %>
+                </span>
               </div>
               <div class="flex items-center gap-1.5 text-sm">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <span>12 min</span>
+                <span class="article-reading-time">12 min</span>
               </div>
-              <div class="flex items-center gap-1.5 text-sm">
+              <div class="article-views-parent flex opacity-0 items-center gap-1.5 text-sm">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -65,14 +101,14 @@
                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
                   </path>
                 </svg>
-                <span>1.2k views</span>
+                <span class="article-views">??</span>
               </div>
             </div>
           </div>
 
 
           <div class="prose prose-slate dark:prose-invert max-w-none reveal" id="articleContent">
-
+<%- body %>
           </div>
         </article>
 
@@ -99,7 +135,7 @@
                 projects.
               </p>
               <form class="space-y-3 pointer-events-none opacity-40">
-                <input type="email" placeholder="seu@email.com"
+                <input type="email" placeholder="yourbestemail@mail.com"
                   class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm">
                 <button type="submit"
                   class="w-full px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium text-sm transition-colors">
@@ -124,8 +160,8 @@
     <%-include("./partials/footer")-%>
 
       <script>
-        postId = "<%= postId %>";
-        getPost(postId);
+       renderArticle();
+       updatePostMeta(<%- JSON.stringify(header) %>);
       </script>
 </body>
 

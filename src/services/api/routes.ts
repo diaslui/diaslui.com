@@ -15,9 +15,8 @@ router.get("/youtube/lastvideos", async (req: Request, res: Response) => {
 
 });
 
-router.get("/stats", async (req: Request, res: Response) => {
-  const totalReqs = await redis.get("site:requests:total");
-
+router.get("/stats/:redisKey", async (req: Request, res: Response) => {
+  const totalReqs = await redis.get("site:requests:" + req.params.redisKey).catch(() => 0);
   res.json({
     totalRequests: totalReqs,
   });

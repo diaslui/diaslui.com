@@ -102,7 +102,7 @@ router.get("/sitemap.xml", async (req, res) => {
 
   const articles = await articlesRes.json();
 
-  articles.forEach(article => {
+  articles.forEach((article: { id: any; date: string | number | Date; }) => {
     const url = `${baseUrl}/read/${article.id}`.toString().trim();
     sitemap += `<url>
 <loc>${url}</loc>

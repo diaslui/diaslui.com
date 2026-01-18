@@ -2,21 +2,19 @@
 
 # diaslui.com
 
-
 This repository contains the full service for <a href="https://diaslui.com">diaslui.com</a>.
+
+> The source code for this website was not created to be a template or theme, but rather for my own use. Feel free to draw inspiration from it as you wish, but this code was not written with the intention of being cloned and implemented.
+
 
 ---
 
 ## Tech Review
 
-* **Runtime**: Bun
-* **Framework**: Elysia
+* **Runtime**: Node
+* **Framework**: Express
 * **Templating**: EJS
-* **ORM**: Prisma
-* **Database**: PostgreSQL
-* **Reverse Proxy**: Nginx
-* **Containerization**: Docker / Docker Compose
-* **Deployment**: Fly.io
+* **Styles**: Tailwind Css
 
 ---
 
@@ -26,40 +24,30 @@ This repository contains the full service for <a href="https://diaslui.com">dias
 
 Some environment variables
 
-Required:
-
-```env
-DATABASE_URL=postgresql://user:password@host:5432/database
-```
-
 Opcional:
 
 ```env
-LASTFM_API_KEY =yourapikey
-STATER_USER_EMAIL=youremail
-STATER_USER_PASSWORD=yourpassword
-STATER_USER_USERNAME=yourusername
-STATER_USER_DISPLAY_NAME=yourdisplayname
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+YOUTUBE_API_KEY=
+YOUTUBE_CHANNEL_ID=
 ```
 
-### Build and Run
+### Install and Run (development)
 
 ```bash
-docker compose up --build
+npm i
 ```
 
-Services started:
-
-* **webapp** → Bun + Elysia (`:3000`)
-* **db** → PostgreSQL (`:5432`)
-* **nginx** → Reverse proxy (`:80`)
-
-The backend listens on:
-
+```bash
+npm run dev
 ```
-0.0.0.0:3000
+
+#### Build Css
+
+```bash
+npm run dev:css
 ```
-Click here to open in your browser: [http://localhost](http://localhost)
 
 <img style="display:block; margin:auto;" src="https://diaslui.com/assets/img/ogbanner.jpg" alt="diaslui.com logo"/>
 

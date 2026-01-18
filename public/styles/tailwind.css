@@ -323,7 +323,7 @@ header::after {
 }
 
 .gradient-text-2 {
-  background: linear-gradient(135deg, #3178C6, #F8295C, #7e31c6);
+  background: linear-gradient(135deg, #0086fb, #F8295C, #5d2bff);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

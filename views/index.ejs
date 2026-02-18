@@ -1,7 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" >
 
 <head>
+  <script>
+
+    const theme = localStorage.getItem("theme") || "dark";
+    const isDark = theme === "dark";
+
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  </script>
 
 
   <%-include("./partials/head")-%>
@@ -30,11 +41,11 @@
                 src="https://avatars.githubusercontent.com/u/115284250?s=400&u=aae1aec8c0a38abb9de00017b896d4f25c184961&v=4"
                 class="w-20 h-20 rounded-full bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center text-3xl mb-4">
               </img>
-              <h3 class="font-bold text-lg mb-1">Pedro Luis D.</h3>
+              <h3 class="font-bold text-lg mb-1">Pedro Luis D. (Lui)</h3>
               <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Software Engineer</p>
               <div class="flex gap-2 w-full">
-                <a href="/"
-                  class="flex-1 gap-2 font-bold justify-center items-center flex text-center py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-full text-sm transition-colors">
+                <a
+                  class="social-linkedin flex-1 gap-2 font-bold justify-center items-center flex text-center py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-full text-sm transition-colors">
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path
                       d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
@@ -125,33 +136,35 @@
 
               <div class="text-center lg:text-left flex-1">
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 lg:mb-6">
-                  Hey There, i'm <span
-                    class="text-transparent bg-clip-text gradient-text-2">Pedro Luis
-                    D.</span>
+                  Hey There, i'm <span class="text-transparent bg-clip-text gradient-text-2">Pedro Luis
+                    D.</span> 
                 </h1>
                 <p class="text-lg font-medium sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 mb-6 max-w-2xl">
-                  I’m a <span class="font-bold text-[#FFBD00]">Software Engineer</span>, open-source creator —> <span class="font-bold text-[#FF3E2B]">curious</span> and <span class="font-bold text-[#0086FB]">self-taught</span>.
-                  Fields like computing, mathematics, and philosophy deeply fascinate me                   <span class="font-thin text-primary-400"> (if studying the history of
-                  humanity and all the progress it brought doesn’t amaze you, I think something might be off :0)</span>.
+                  I’m a <span class="font-bold text-[#FFBD00]">Software Engineer</span>, open-source creator —> <span
+                    class="font-bold text-[#FF3E2B]">curious</span> and <span
+                    class="font-bold text-[#0086FB]">self-taught</span>.
+                  Fields like computing, mathematics, and philosophy deeply fascinate me <span
+                    class="font-thin text-primary-400"> (if studying the history of
+                    humanity and all the progress it brought doesn’t amaze you, I think something might be off
+                    :0)</span>.
 
                   Learning by sharing and sharing knowledge feels incredibly powerful. That’s why I created this
-                  website. It’s my <span class="font-bold text-green-600">digital garden</span> a small digital ecosystem where I leave notes, ideas, and rough
+                  website. It’s my <span class="font-bold text-green-600">digital garden</span> a small digital
+                  ecosystem where I leave notes, ideas, and rough
                   drafts. You can follow my thoughts through my blog or my YouTube channel. Enjoy!
-                
 
-                     <span class="font-black text-accent-500">
+
+                  <span class="font-black text-accent-500">
                     Everything on this site is written by me, not AI.</span>
                 </p>
                 <div class="flex flex-wrap justify-center lg:justify-start gap-3">
-                  <a
-                    href="/about"
+                  <a href="/about"
                     class="px-6 py-3 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-bold transition-all hover:shadow-lg hover:shadow-primary-500/25">
                     More About me
                   </a>
-                  <a
-                    href="/articles"
+                  <a href="/articles"
                     class="px-6 py-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full font-medium transition-colors">
-                   Explore my articles!
+                    Explore my articles!
                   </a>
                 </div>
               </div>
@@ -188,7 +201,8 @@
                   <span class="total-requests font-semibold"></span>
                 </div>
                 <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
-                  <div class="porcent-total-stats bg-accent-500 shadow-xl shadow-rose-600 h-2 rounded-full" style="width: 0%"></div>
+                  <div class="porcent-total-stats bg-accent-500 shadow-xl shadow-rose-600 h-2 rounded-full"
+                    style="width: 0%"></div>
                 </div>
               </div>
             </div>
@@ -211,14 +225,19 @@
             </div>
             <a
               class="social-blog px-5 flex items-center justify-center gap-2  py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-full text-sm font-bold transition-colors">
-   
-        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-book h-5 w-5" viewBox="0 0 576 512" fill="currentColor"><path d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"/></svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-book h-5 w-5" viewBox="0 0 576 512"
+                fill="currentColor">
+                <path
+                  d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z" />
+              </svg>
               View More Articles
-          </a>
+            </a>
           </div>
 
           <div id="info"
-            class="hidden bg-white dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">no data
+            class="hidden bg-white dark:bg-subgdark border border-slate-200 dark:border-slate-800 rounded-2xl p-6">no
+            data
           </div>
 
           <div id="last-posts-div" class="grid my-4 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -231,19 +250,24 @@
             <div class="flex flex-col items-start gap-3">
 
               <h2 class="text-2xl sm:text-3xl font-bold">Recent Videos</h2>
-              <p class="text-sm font-semibold text-slate-600 dark:text-slate-400">My latest video content on YouTube.</p>
+              <p class="text-sm font-semibold text-slate-600 dark:text-slate-400">My latest video content on YouTube.
+              </p>
 
             </div>
             <a
               class="social-youtube px-5 flex items-center justify-center gap-2  py-3 bg-accent-500 hover:bg-accent-600 text-white rounded-full text-sm font-bold transition-colors">
-    
-<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-youtube h-5 w-5" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/></svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-youtube h-5 w-5"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z" />
+              </svg>
               View All on YouTube
-          </a>
+            </a>
           </div>
 
           <div id="yt-videos-div" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
- 
+
 
           </div>
         </section>

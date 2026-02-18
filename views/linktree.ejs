@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 
 <head>
+  <script>
+    const theme = localStorage.getItem("theme") || "dark";
+    const isDark = theme === "dark";
 
-
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  </script>
   <%-include("./partials/head")-%>
     <title><%= title %> | Pedro Luis D.</title>
     <meta name="description"
@@ -41,7 +49,7 @@
       <div class="relative inline-block mb-6">
         <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-gradient-to-br from-primary-400  to-accent-500 p-1  glow-profile animated-gradient">
           <div class="w-full h-full rounded-full bg-slate-100 dark:bg-subgdark flex items-center justify-center overflow-hidden">
-            <img src="/assets/img/pictures/thc.jpg" alt="Luis Dias" class="w-full h-full object-cover rounded-full">
+            <img src="/assets/img/pictures/thislui.jpg" alt="Luis Dias" class="w-full h-full object-cover rounded-full">
           </div>
         </div>
       </div>

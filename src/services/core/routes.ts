@@ -29,7 +29,7 @@ router.get("/articles", (req: Request, res: Response) => {
 
 router.get("/read/:postId", async (req: Request, res: Response) => {
   const url = `https://raw.githubusercontent.com/luiisp/blog-storage-diaslui.com/refs/heads/master/posts/${encodeURIComponent(
-    req.params.postId.toString()
+    req.params.postId.toString(),
   )}.md`;
 
   const articleRequest = await fetch(url);
@@ -74,12 +74,19 @@ router.get("/links", (req: Request, res: Response) => {
   });
 });
 
+router.get("/maps", (req: Request, res: Response) => {
+  res.render("maps", {
+    title: "Lui Maps",
+    description:
+      "Explore the places I've visited around the world - my personal travel timeline.",
+  });
+});
+
 router.get("/sitemap.xml", async (req, res) => {
   const baseUrl = "https://diaslui.com";
   const today = new Date().toISOString().split("T")[0];
 
-  let sitemap =
-`<?xml version="1.0" encoding="UTF-8"?>
+  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
@@ -97,12 +104,12 @@ router.get("/sitemap.xml", async (req, res) => {
 `;
 
   const articlesRes = await fetch(
-    "https://raw.githubusercontent.com/luiisp/blog-storage-diaslui.com/refs/heads/master/posts/index.json"
+    "https://raw.githubusercontent.com/luiisp/blog-storage-diaslui.com/refs/heads/master/posts/index.json",
   );
 
   const articles = await articlesRes.json();
 
-  articles.forEach((article: { id: any; date: string | number | Date; }) => {
+  articles.forEach((article: { id: any; date: string | number | Date }) => {
     const url = `${baseUrl}/read/${article.id}`.toString().trim();
     sitemap += `<url>
 <loc>${url}</loc>
@@ -133,9 +140,11 @@ router.get("/sitemap.xml", async (req, res) => {
 });
 
 router.get("/robots.txt", (req: Request, res: Response) => {
-  const robotsTxt = "User-agent: *\nDisallow:\nSitemap: https://diaslui.com/sitemap.xml\n";
+  const robotsTxt =
+    "User-agent: *\nDisallow:\nSitemap: https://diaslui.com/sitemap.xml\n";
   res.setHeader("Content-Type", "text/plain");
   res.send(robotsTxt);
 });
+
 
 export default router;

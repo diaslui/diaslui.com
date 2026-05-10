@@ -27,6 +27,65 @@ router.get("/articles", (req: Request, res: Response) => {
   });
 });
 
+router.get("/competitive", (req: Request, res: Response) => {
+  res.render("competitive", {
+    title: "Competitive Programming",
+    description: "My competitive programming library.",
+  });
+});
+
+router.get("/problems", (req: Request, res: Response) => {
+  res.render("problems", {
+    title: "Solved Problems",
+    description: "A list of solved problems from platforms like Codeforces.",
+  });
+});
+
+router.get("/problems/:problemId", async (req: Request, res: Response) => {
+  const problemId = req.params.problemId;
+
+  let solutions;
+  let cachedSolutions = await redis.get("github:solutions");
+
+  if (cachedSolutions) {
+    try {
+      solutions = JSON.parse(String(cachedSolutions));
+    } catch (parseError) {
+      console.warn("Invalid cache data in core routes, fetching new...", parseError);
+      cachedSolutions = null; 
+    }
+  }
+
+  if (!cachedSolutions || !solutions) {
+    const response = await fetch(
+      `${req.protocol}://${req.get("host")}/api/solutions`
+    );
+    if (!response.ok) {
+      return res.status(500).render("404"); 
+    }
+    solutions = await response.json();
+  }
+
+  const solution = solutions.find((s: any) => s.name === problemId);
+
+  if (!solution) {
+    return res.status(404).render("404");
+  }
+
+  const solutionContent = await fetch(solution.download_url).then((res) =>
+    res.text()
+  );
+
+  res.render("solution", {
+    title: `Solution for Codeforces ${solution.name}`,
+    description: `C++ solution for Codeforces problem ${solution.name}`,
+    solution: {
+      ...solution,
+      content: solutionContent,
+    },
+  });
+});
+
 router.get("/read/:postId", async (req: Request, res: Response) => {
   const url = `https://raw.githubusercontent.com/luiisp/blog-storage-diaslui.com/refs/heads/master/posts/${encodeURIComponent(
     req.params.postId.toString(),
@@ -131,7 +190,46 @@ router.get("/sitemap.xml", async (req, res) => {
   <lastmod>2026-01-10</lastmod>
   <priority>0.6</priority>
   </url>
+
+  <url>
+  <loc>${baseUrl}/competitive</loc>
+  <lastmod>${today}</lastmod>
+  <priority>0.8</priority>
+  </url>
+
+  <url>
+  <loc>${baseUrl}/problems</loc>
+  <lastmod>${today}</lastmod>
+  <priority>0.8</priority>
+  </url>
   `;
+
+  // Adicionar dinamicamente as solucoes ao sitemap
+  try {
+    let solutions;
+    let cachedSolutions = await redis.get("github:solutions");
+    if (cachedSolutions) {
+      solutions = JSON.parse(String(cachedSolutions));
+    } else {
+        const response = await fetch(`${req.protocol}://${req.get("host")}/api/solutions`);
+        if (response.ok) {
+            solutions = await response.json();
+        }
+    }
+
+    if (solutions && Array.isArray(solutions)) {
+      solutions.forEach((solution: any) => {
+        const problemUrl = `${baseUrl}/problems/${solution.name}`.toString().trim();
+        sitemap += `<url>
+<loc>${problemUrl}</loc>
+<lastmod>${today}</lastmod>
+<priority>0.7</priority>
+</url>\n`;
+      });
+    }
+  } catch (err) {
+    console.error("Error adding solutions to sitemap:", err);
+  }
 
   sitemap += "</urlset>";
 

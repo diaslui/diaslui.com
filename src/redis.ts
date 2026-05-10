@@ -29,6 +29,17 @@ const redis = {
     }
     return await redisInstance.incr(key);
   },
+
+  set: async (
+    key: string,
+    value: string,
+    opts?: any
+  ): Promise<string | null> => {
+    if (!redisInstance) {
+      return null;
+    }
+    return await redisInstance.set(key, value, opts);
+  },
 };
 
 export default redis;

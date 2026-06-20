@@ -1,3 +1,4 @@
+
 const socialUrls = [
   {
     name: "instagram",
@@ -27,6 +28,11 @@ const socialUrls = [
   {
     name: "youtube",
     url: "https://www.youtube.com/@diaslui",
+    openInNewTab: true,
+  },
+  {
+    name: "codeforces",
+    url: "https://codeforces.com/profile/diaslui",
     openInNewTab: true,
   },
   {

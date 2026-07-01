@@ -1,56 +1,444 @@
 <!DOCTYPE html>
 <html lang="en" class="text-base">
   <%- include('partials/head', { title: title, description: description }) %>
-       <script src="/assets/scripts/global.js"></script>
+  <script src="/assets/scripts/global.js"></script>
 
-  <body
-    class="flex h-screen flex-col bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50"
-  >
+  <style>
+    /* =========================================================
+       ANIMAÇÃO DE ENTRADA — orquestrada igual à link page
+    ========================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* =========================================================
+       TERMINAL HERO — assinatura única da página
+    ========================================================= */
+    .terminal-hero {
+      font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
+      font-size: .85rem;
+      line-height: 1.6;
+    }
+    .terminal-line { white-space: nowrap; overflow: hidden; }
+    .terminal-cursor {
+      display: inline-block; width: 2px; height: 1em;
+      background: #10b981; vertical-align: text-bottom; margin-left: 1px;
+      animation: blink .9s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .terminal-ac { color: #10b981; font-weight: 700; }
+    .terminal-prompt { color: #6b7280; }
+    .terminal-cmd { color: #e5e7eb; }
+    .terminal-time { color: #6b7280; }
+
+    /* =========================================================
+       CARDS DE NAVEGAÇÃO
+    ========================================================= */
+    .nav-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+    }
+    .nav-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .35s ease;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+    .nav-card:hover { transform: translateY(-4px); }
+    .nav-card:active { transform: translateY(-1px); transition-duration: .1s; }
+
+    .nav-card-amber::before { background: radial-gradient(circle at 30% 40%, rgba(217,119,6,.12), transparent 65%); }
+    .nav-card-amber:hover { border-color: #d97706 !important; box-shadow: 0 12px 32px -8px rgba(217,119,6,.25); }
+    .nav-card-amber:hover::before { opacity: 1; }
+
+    .nav-card-green::before { background: radial-gradient(circle at 30% 40%, rgba(16,185,129,.1), transparent 65%); }
+    .nav-card-green:hover { border-color: #10b981 !important; box-shadow: 0 12px 32px -8px rgba(16,185,129,.2); }
+    .nav-card-green:hover::before { opacity: 1; }
+
+    .card-icon-amber { transition: transform .35s ease, box-shadow .35s ease; }
+    .nav-card-amber:hover .card-icon-amber { transform: scale(1.1) rotate(-4deg); box-shadow: 0 4px 14px rgba(217,119,6,.35); }
+
+    .card-icon-green { transition: transform .35s ease, box-shadow .35s ease; }
+    .nav-card-green:hover .card-icon-green { transform: scale(1.1) rotate(-4deg); box-shadow: 0 4px 14px rgba(16,185,129,.3); }
+
+    .card-arrow { transition: transform .3s ease; }
+    .nav-card:hover .card-arrow { transform: translateX(4px); }
+
+    /* =========================================================
+       HEATMAP — células com hover state
+    ========================================================= */
+    .heatmap-cell {
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .heatmap-cell:hover {
+      transform: scale(1.35);
+      box-shadow: 0 0 0 2px #10b981;
+      z-index: 1;
+      position: relative;
+    }
+
+    /* =========================================================
+       STAT CARDS — count-up e glow
+    ========================================================= */
+    .stat-number { font-variant-numeric: tabular-nums; }
+
+    /* =========================================================
+       FUNDO AMBIENT (mesmas cores da link page, mais discreto aqui)
+    ========================================================= */
+    .ambient-bg {
+      position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+    }
+    .ambient-blob {
+      position: absolute; border-radius: 9999px; filter: blur(60px);
+      will-change: transform;
+    }
+    .blob-amber {
+      width: 320px; height: 320px; top: -80px; right: -60px;
+      background: radial-gradient(circle, rgba(217,119,6,.18), transparent 70%);
+      animation: blobDrift 28s ease-in-out infinite;
+    }
+    .blob-green {
+      width: 260px; height: 260px; bottom: 5%; left: -40px;
+      background: radial-gradient(circle, rgba(16,185,129,.13), transparent 70%);
+      animation: blobDrift 22s ease-in-out infinite reverse;
+    }
+    .blob-red {
+      width: 200px; height: 200px; top: 40%; right: 5%;
+      background: radial-gradient(circle, rgba(239,68,68,.08), transparent 70%);
+      animation: blobDrift 34s ease-in-out infinite 4s;
+    }
+    @keyframes blobDrift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, 40px) scale(1.08); }
+      66% { transform: translate(-20px, 20px) scale(.95); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ambient-blob { animation: none !important; }
+      .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+      .nav-card, .nav-card:hover { transition: none !important; transform: none !important; }
+    }
+
+    /* =========================================================
+       RATING BADGE GLOW ao hover
+    ========================================================= */
+    .rating-badge {
+      transition: box-shadow .3s ease, transform .3s ease;
+    }
+    .rating-badge:hover { transform: scale(1.05); }
+
+    /* =========================================================
+       DIVIDER COM LABEL
+    ========================================================= */
+    .section-eyebrow {
+      font-family: 'SFMono-Regular', 'Consolas', monospace;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <body class="flex min-h-screen flex-col bg-zinc-50 dark:bg-zinc-900 text-zinc-950 dark:text-zinc-50 relative">
+
+    <!-- Fundo ambiente discreto -->
+    <div class="ambient-bg" aria-hidden="true">
+      <span class="ambient-blob blob-amber"></span>
+      <span class="ambient-blob blob-green"></span>
+      <span class="ambient-blob blob-red"></span>
+    </div>
+
     <%- include('partials/header') %>
-    <main class="flex-1">
-      <div class="container mx-auto mt-12 max-w-4xl px-4">
-        <div class="mb-12 border-b border-zinc-200 pb-8 dark:border-zinc-800">
-          <h1 class="mb-4 text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-6xl">
-            Competitive <span class="text-amber-600 dark:text-amber-500">Programming</span>
+
+    <main class="flex-1 relative z-10">
+      <div class="container mx-auto mt-10 sm:mt-14 max-w-4xl px-4 pb-16">
+
+        <section class="mb-12 reveal">
+          
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-4">
+            Competitive<br>
+            <span class="text-amber-600 dark:text-amber-500">Programming</span>
           </h1>
-          <p class="mt-4 text-xl leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-2xl">
-            Welcome to my personal library. A curated collection of solved problems and raw algorithm implementations.
+          <p class="text-lg sm:text-xl text-zinc-500 dark:text-zinc-400 max-w-xl leading-relaxed">
+            Personal library of solved problems and raw algorithm implementations. Built while grinding.
           </p>
+        </section>
+
+        <div class="flex items-center gap-3 mb-6 reveal" style="transition-delay:.08s">
+          <span class="section-eyebrow text-zinc-400 dark:text-zinc-500">// explore</span>
+          <span class="flex-1 h-px bg-zinc-200 dark:bg-zinc-800"></span>
         </div>
 
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2"> 
-          <a href="/problems" class="group relative flex flex-col rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm transition-all hover:shadow-md hover:-translate-y-1 dark:border-zinc-800 dark:bg-zinc-900/50 dark:hover:bg-zinc-800/80">
-            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-12 reveal" style="transition-delay:.14s">
+
+          <!-- Solved Problems -->
+          <a href="/problems"
+            class="nav-card nav-card-amber group flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-7 shadow-sm backdrop-blur-sm">
+            <div class="mb-5 card-icon-amber inline-flex h-13 w-13 items-center justify-center rounded-xl bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 shadow-sm" style="width:52px;height:52px">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
             </div>
-            <h2 class="mb-3 text-2xl font-bold text-zinc-900 dark:text-zinc-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Solved Problems</h2>
-            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Explore my collection of solved problems from Codeforces and other judges, complete with C++ solutions.
+            <h2 class="mb-2 text-xl font-bold text-zinc-900 dark:text-zinc-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Solved Problems</h2>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed flex-1">
+              Codeforces problems with full C++ solutions, organized by tag and difficulty.
             </p>
-            <div class="mt-auto pt-6 flex items-center text-sm font-medium text-amber-600 dark:text-amber-400">
-              <span>View solutions</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="mt-5 flex items-center text-sm font-semibold text-amber-600 dark:text-amber-400">
+              <span>Browse solutions</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="card-arrow ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </div>
           </a>
-          
-          <div class="group relative flex flex-col rounded-2xl border border-zinc-200 bg-white p-8 opacity-60 shadow-sm transition-all dark:border-zinc-800 dark:bg-zinc-900/50">
-            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400">
+
+          <!-- Algorithms (em breve) -->
+          <div class="nav-card nav-card-green group flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-7 shadow-sm backdrop-blur-sm opacity-55">
+            <div class="mb-5 card-icon-green inline-flex items-center justify-center rounded-xl bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-400 shadow-sm" style="width:52px;height:52px">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
               </svg>
             </div>
-            <h2 class="mb-3 text-2xl font-bold text-zinc-900 dark:text-zinc-50">Algorithms</h2>
-            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Pure C++ algorithm implementations and data structures.
+            <h2 class="mb-2 text-xl font-bold text-zinc-900 dark:text-zinc-50">Algorithms</h2>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed flex-1">
+              Pure C++ implementations of data structures and classic algorithms.
             </p>
+            <div class="mt-5 flex items-center text-xs font-mono text-zinc-400 dark:text-zinc-600">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 mr-2 animate-pulse"></span>
+              coming soon
+            </div>
           </div>
         </div>
+
+        <!-- ===== DIVIDER ===== -->
+        <div class="flex items-center gap-3 mb-6 reveal" style="transition-delay:.2s">
+          <span class="section-eyebrow text-zinc-400 dark:text-zinc-500">// stats</span>
+          <span class="flex-1 h-px bg-zinc-200 dark:bg-zinc-800"></span>
+        </div>
+
+        <!-- ===== CF STATS ===== -->
+        <section class="reveal" style="transition-delay:.26s">
+          <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/60 shadow-sm backdrop-blur-sm overflow-hidden">
+
+            <!-- Header da seção -->
+            <div class="flex items-center justify-between gap-4 px-6 sm:px-8 pt-6 sm:pt-8 pb-5 border-b border-zinc-100 dark:border-zinc-800">
+              <div class="flex items-center gap-3">
+                <img src="https://codeforces.org/s/0/favicon-32x32.png" alt="Codeforces" class="w-7 h-7 rounded">
+                <h2 class="text-lg font-bold text-zinc-900 dark:text-zinc-50">Codeforces Stats</h2>
+              </div>
+              <!-- skeleton do badge de rating, substituído pelo JS -->
+              <div id="cf-rating-badge" class="h-7 w-28 bg-zinc-100 dark:bg-zinc-800 rounded-full animate-pulse"></div>
+            </div>
+
+            <!-- Corpo — skeleton enquanto carrega -->
+            <div id="cf-stats-detailed" class="px-6 sm:px-8 py-6">
+              <div class="animate-pulse space-y-5">
+                <!-- profile row skeleton -->
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-full bg-zinc-200 dark:bg-zinc-700 shrink-0"></div>
+                  <div class="flex-1 space-y-2">
+                    <div class="h-4 bg-zinc-200 dark:bg-zinc-700 rounded w-32"></div>
+                    <div class="h-3 bg-zinc-200 dark:bg-zinc-700 rounded w-24"></div>
+                  </div>
+                </div>
+                <!-- heatmap skeleton -->
+                <div class="h-20 bg-zinc-100 dark:bg-zinc-800 rounded-xl"></div>
+                <!-- stat cards skeleton -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div class="h-28 bg-zinc-100 dark:bg-zinc-800 rounded-xl"></div>
+                  <div class="h-28 bg-zinc-100 dark:bg-zinc-800 rounded-xl"></div>
+                  <div class="h-28 bg-zinc-100 dark:bg-zinc-800 rounded-xl"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+         
+
       </div>
     </main>
+
     <%- include('partials/footer') %>
+
+    <script>
+      // ===== Scroll reveal =====
+      const revealEls = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+        });
+      }, { threshold: .12 });
+      revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+      
+
+      // ===== Count-up animado =====
+      function animateCount(el, target, duration) {
+        const start = performance.now();
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(ease * target);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      // ===== Fetch CF Stats =====
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          const res = await fetch('/api/codeforces/stats');
+          if (!res.ok) throw new Error('failed');
+          const data = await res.json();
+
+          const getRatingColor = function(rating) {
+            if (!rating || rating === 0) return { text: 'text-zinc-500', bg: 'bg-zinc-100 dark:bg-zinc-800', border: '' };
+            if (rating < 1200) return { text: 'text-zinc-500', bg: 'bg-zinc-100 dark:bg-zinc-800', border: '' };
+            if (rating < 1400) return { text: 'text-green-600', bg: 'bg-green-100 dark:bg-green-900/40', border: 'border border-green-300 dark:border-green-700' };
+            if (rating < 1600) return { text: 'text-cyan-500', bg: 'bg-cyan-100 dark:bg-cyan-900/40', border: 'border border-cyan-300 dark:border-cyan-700' };
+            if (rating < 1900) return { text: 'text-blue-500', bg: 'bg-blue-100 dark:bg-blue-900/40', border: 'border border-blue-300 dark:border-blue-700' };
+            if (rating < 2100) return { text: 'text-fuchsia-500', bg: 'bg-fuchsia-100 dark:bg-fuchsia-900/40', border: 'border border-fuchsia-300 dark:border-fuchsia-700' };
+            if (rating < 2400) return { text: 'text-orange-500', bg: 'bg-orange-100 dark:bg-orange-900/40', border: 'border border-orange-300 dark:border-orange-700' };
+            return { text: 'text-red-500', bg: 'bg-red-100 dark:bg-red-900/40', border: 'border border-red-300 dark:border-red-700' };
+          };
+          const rc = getRatingColor(data.profile.rating);
+
+          // Atualiza badge do header
+          document.getElementById('cf-rating-badge').outerHTML =
+            `<span class="rating-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-bold ${rc.text} ${rc.bg} ${rc.border} shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-70"></span>
+              ${data.profile.rank} · ${data.profile.rating}
+            </span>`;
+
+          // Heatmap
+          const heatmapDays = 364;
+          const recentHeatmap = data.heatmap.slice(-heatmapDays);
+          let heatmapHTML = '';
+          recentHeatmap.forEach(function(day) {
+            const c = day.count;
+            let color = 'bg-zinc-100 dark:bg-zinc-800';
+            if (c > 0 && c <= 2)  color = 'bg-green-300 dark:bg-green-800';
+            else if (c > 2 && c <= 4) color = 'bg-green-400 dark:bg-green-600';
+            else if (c > 4 && c <= 6) color = 'bg-green-500';
+            else if (c > 6)           color = 'bg-green-600 dark:bg-green-400';
+            heatmapHTML += `<div class="heatmap-cell w-3 h-3 md:w-3.5 md:h-3.5 rounded-sm ${color} cursor-pointer" title="${day.date}: ${c} solved"></div>`;
+          });
+
+          const container = document.getElementById('cf-stats-detailed');
+          container.innerHTML = `
+            <!-- Profile row -->
+            <div class="flex flex-col sm:flex-row sm:items-center gap-5 mb-7">
+              <img src="${data.profile.avatar || 'https://codeforces.org/s/0/favicon-32x32.png'}"
+                class="w-16 h-16 rounded-full border-2 border-zinc-200 dark:border-zinc-700 shadow-md shrink-0" alt="avatar">
+              <div class="flex-1 min-w-0">
+                <p class="font-black text-2xl text-zinc-900 dark:text-zinc-50 leading-none mb-2">${data.profile.handle}</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${rc.text} ${rc.bg} ${rc.border}">
+                    <span class="w-1 h-1 rounded-full bg-current"></span>
+                    ${data.profile.rank} · ${data.profile.rating}
+                  </span>
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
+                    peak ${data.profile.maxRank} (${data.profile.maxRating})
+                  </span>
+                </div>
+              </div>
+              <a href="https://codeforces.com/profile/${data.profile.handle}" target="_blank"
+                class="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 text-sm font-bold shadow hover:shadow-md hover:-translate-y-0.5 transition-all">
+                Profile
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Heatmap — posição de destaque -->
+            <div class="mb-7 rounded-xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-100 dark:border-zinc-800 px-5 py-5 overflow-x-auto">
+              <p class="section-eyebrow text-zinc-400 dark:text-zinc-500 mb-4">// contributions · last year</p>
+              <div class="grid grid-flow-col grid-rows-7 gap-1 md:gap-1.5 w-max">
+                ${heatmapHTML}
+              </div>
+              <div class="flex items-center gap-2 mt-3 justify-end">
+                <span class="text-xs text-zinc-400">less</span>
+                <span class="w-3 h-3 rounded-sm bg-zinc-200 dark:bg-zinc-700"></span>
+                <span class="w-3 h-3 rounded-sm bg-green-300 dark:bg-green-800"></span>
+                <span class="w-3 h-3 rounded-sm bg-green-400 dark:bg-green-600"></span>
+                <span class="w-3 h-3 rounded-sm bg-green-500"></span>
+                <span class="w-3 h-3 rounded-sm bg-green-600 dark:bg-green-400"></span>
+                <span class="text-xs text-zinc-400">more</span>
+              </div>
+            </div>
+
+            <!-- Stat cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800 p-5">
+                <p class="section-eyebrow text-zinc-400 dark:text-zinc-500 mb-4">// solved</p>
+                <div class="space-y-3">
+                  <div class="flex items-end justify-between">
+                    <span class="text-xs text-zinc-500">all time</span>
+                    <span class="stat-number text-3xl font-black text-green-500" data-count="${data.solved.allTime}">0</span>
+                  </div>
+                  <div class="flex items-end justify-between">
+                    <span class="text-xs text-zinc-500">last year</span>
+                    <span class="stat-number text-xl font-bold text-green-600 dark:text-green-400" data-count="${data.solved.lastYear}">0</span>
+                  </div>
+                  <div class="flex items-end justify-between">
+                    <span class="text-xs text-zinc-500">last month</span>
+                    <span class="stat-number text-lg font-bold text-green-700 dark:text-green-300" data-count="${data.solved.lastMonth}">0</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800 p-5">
+                <p class="section-eyebrow text-zinc-400 dark:text-zinc-500 mb-4">// streak</p>
+                <div class="space-y-3">
+                  <div class="flex items-end justify-between">
+                    <span class="text-xs text-zinc-500">all time</span>
+                    <span class="stat-number text-3xl font-black text-amber-500" data-count="${data.streaks.allTime}">0</span>
+                  </div>
+                  <div class="flex items-end justify-between">
+                    <span class="text-xs text-zinc-500">last year</span>
+                    <span class="stat-number text-xl font-bold text-amber-600 dark:text-amber-400" data-count="${data.streaks.lastYear}">0</span>
+                  </div>
+                  <div class="flex items-end justify-between">
+                    <span class="text-xs text-zinc-500">last month</span>
+                    <span class="stat-number text-lg font-bold text-amber-700 dark:text-amber-300" data-count="${data.streaks.lastMonth}">0</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-xl bg-gradient-to-br from-amber-500/10 via-zinc-50 to-green-500/10 dark:from-amber-500/10 dark:via-zinc-800/50 dark:to-green-500/10 border border-amber-200/50 dark:border-amber-500/20 p-5 flex flex-col items-center justify-center text-center gap-3">
+         
+                <div>
+                  <p class="text-xs text-zinc-500 mt-1 leading-relaxed"> Competitive programming is about winning against yourself </p>
+                </div>
+              </div>
+            </div>
+          `;
+
+          // Dispara count-up em todos os [data-count]
+          document.querySelectorAll('[data-count]').forEach(function(el) {
+            const target = parseInt(el.dataset.count, 10);
+            animateCount(el, target, 1200);
+          });
+
+        } catch(e) {
+          console.error(e);
+          document.getElementById('cf-stats-detailed').innerHTML = `
+            <div class="flex items-center gap-3 p-4 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Failed to load Codeforces stats. Check your API config.
+            </div>`;
+        }
+      });
+    </script>
+
   </body>
 </html>

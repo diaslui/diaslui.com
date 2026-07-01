@@ -49,7 +49,11 @@ router.get("/problems/:problemId", async (req: Request, res: Response) => {
 
   if (cachedSolutions) {
     try {
-      solutions = JSON.parse(String(cachedSolutions));
+      if (typeof cachedSolutions === 'string') {
+        solutions = JSON.parse(cachedSolutions);
+      } else {
+        solutions = cachedSolutions;
+      }
     } catch (parseError) {
       console.warn("Invalid cache data in core routes, fetching new...", parseError);
       cachedSolutions = null; 
@@ -209,7 +213,11 @@ router.get("/sitemap.xml", async (req, res) => {
     let solutions;
     let cachedSolutions = await redis.get("github:solutions");
     if (cachedSolutions) {
-      solutions = JSON.parse(String(cachedSolutions));
+      if (typeof cachedSolutions === 'string') {
+        solutions = JSON.parse(cachedSolutions);
+      } else {
+        solutions = cachedSolutions;
+      }
     } else {
         const response = await fetch(`${req.protocol}://${req.get("host")}/api/solutions`);
         if (response.ok) {
